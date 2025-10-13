@@ -18,67 +18,12 @@
     }
 
     .container {
-      display: flex;
-      flex-wrap: wrap;
       max-width: 1000px;
       margin: 40px auto;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.1);
       overflow: hidden;
-    }
-
-    /* Sidebar styling */
-    .sidebar {
-      flex: 1 1 280px;
-      background: #f0f4f8;
-      padding: 30px;
-      border-right: 1px solid #ddd;
-      min-height: 100%;
-    }
-
-    .sidebar h2 {
-      color: #007acc;
-      margin-bottom: 20px;
-    }
-
-    .project-card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .project-card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 1.1rem;
-      color: #007acc;
-    }
-
-    .project-card p {
-      font-size: 0.9rem;
-      color: #444;
-    }
-
-    .project-card a {
-      display: inline-block;
-      margin-top: 8px;
-      text-decoration: none;
-      color: #007acc;
-      font-weight: 500;
-    }
-
-    .project-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    /* Main content styling */
-    .main-content {
-      flex: 3 1 700px;
       padding: 40px;
     }
 
@@ -138,6 +83,52 @@
       font-weight: 500;
     }
 
+    /* Projects section styling */
+    .projects {
+      margin-top: 40px;
+    }
+
+    .projects h2 {
+      color: #007acc;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #007acc;
+      padding-bottom: 6px;
+    }
+
+    .project-card {
+      background: #f0f4f8;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      color: #007acc;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 8px;
+      text-decoration: none;
+      color: #007acc;
+      font-weight: 500;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
     footer {
       text-align: center;
       margin-top: 40px;
@@ -147,20 +138,75 @@
 
     @media (max-width: 800px) {
       .container {
-        flex-direction: column;
-      }
-      .sidebar {
-        border-right: none;
-        border-bottom: 1px solid #ddd;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
+    <!-- Header -->
+    <header>
+      <h1>D3nnycrane</h1>
+      <p class="contact">
+        📧 <a href="mailto:your.email@example.com">your.email@example.com</a> | 
+        🌐 <a href="https://linkedin.com/in/yourname">LinkedIn</a> | 
+        💻 <a href="https://github.com/D3nnycrane">GitHub</a>
+      </p>
+    </header>
+
+    <!-- Profile -->
+    <section>
+      <h2 class="main-section">Profile</h2>
+      <p>A cybersecurity compliance analyst with 7+ years of experience across security operations, compliance baselining, and stakeholder reporting. Currently expanding into technical security engineering and AI-driven defense.</p>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="main-section">Experience</h2>
+      <h3>Security Compliance Analyst – Company XYZ</h3>
+      <p><em>Jan 2021 – Present</em></p>
+      <ul>
+        <li>Performed compliance analysis and reporting across CIS, NIST, and ISO frameworks.</li>
+        <li>Worked with cross-functional teams to ensure cybersecurity controls were implemented.</li>
+        <li>Built dashboards and reports for executives on compliance posture and risk metrics.</li>
+      </ul>
+
+      <h3>Systems Administrator – Company ABC</h3>
+      <p><em>2017 – 2021</em></p>
+      <ul>
+        <li>Managed Windows/Linux servers and implemented security hardening across environments.</li>
+        <li>Automated patching and reporting processes with PowerShell and Bash scripts.</li>
+      </ul>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section>
+      <h2 class="main-section">Education & Certifications</h2>
+      <ul>
+        <li>CompTIA CySA+ (202X)</li>
+        <li>Bachelor’s Degree in [Your Field]</li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2 class="main-section">Skills</h2>
+      <div class="skills">
+        <span class="skill-tag">Cybersecurity</span>
+        <span class="skill-tag">Compliance</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Networking</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">PowerShell</span>
+        <span class="skill-tag">Risk Analysis</span>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects">
       <h2>Projects</h2>
+
       <div class="project-card">
         <h3>Home Lab Setup Guide</h3>
         <p>A step-by-step guide showing how I built a professional home lab from scratch, including networking, virtualization, and server setup.</p>
@@ -178,67 +224,11 @@
         <p>A curated collection of PowerShell and Bash scripts for automating routine sysadmin and compliance tasks.</p>
         <a href="https://your-substack-link.com/automation-scripts" target="_blank">Read More</a>
       </div>
-    </div>
+    </section>
 
-    <!-- Main Content -->
-    <div class="main-content">
-      <header>
-        <h1>D3nnycrane</h1>
-        <p class="contact">
-          📧 <a href="mailto:your.email@example.com">your.email@example.com</a> | 
-          🌐 <a href="https://linkedin.com/in/yourname">LinkedIn</a> | 
-          💻 <a href="https://github.com/D3nnycrane">GitHub</a>
-        </p>
-      </header>
-
-      <section>
-        <h2 class="main-section">Profile</h2>
-        <p>A cybersecurity compliance analyst with 7+ years of experience across security operations, compliance baselining, and stakeholder reporting. Currently expanding into technical security engineering and AI-driven defense.</p>
-      </section>
-
-      <section>
-        <h2 class="main-section">Experience</h2>
-        <h3>Security Compliance Analyst – Company XYZ</h3>
-        <p><em>Jan 2021 – Present</em></p>
-        <ul>
-          <li>Performed compliance analysis and reporting across CIS, NIST, and ISO frameworks.</li>
-          <li>Worked with cross-functional teams to ensure cybersecurity controls were implemented.</li>
-          <li>Built dashboards and reports for executives on compliance posture and risk metrics.</li>
-        </ul>
-
-        <h3>Systems Administrator – Company ABC</h3>
-        <p><em>2017 – 2021</em></p>
-        <ul>
-          <li>Managed Windows/Linux servers and implemented security hardening across environments.</li>
-          <li>Automated patching and reporting processes with PowerShell and Bash scripts.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 class="main-section">Education & Certifications</h2>
-        <ul>
-          <li>CompTIA CySA+ (202X)</li>
-          <li>Bachelor’s Degree in [Your Field]</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 class="main-section">Skills</h2>
-        <div class="skills">
-          <span class="skill-tag">Cybersecurity</span>
-          <span class="skill-tag">Compliance</span>
-          <span class="skill-tag">Linux</span>
-          <span class="skill-tag">Networking</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">PowerShell</span>
-          <span class="skill-tag">Risk Analysis</span>
-        </div>
-      </section>
-
-      <footer>
-        © 2025 D3nnycrane. All rights reserved.
-      </footer>
-    </div>
+    <footer>
+      © 2025 D3nnycrane. All rights reserved.
+    </footer>
   </div>
 </body>
 </html>
