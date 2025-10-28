@@ -4,104 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>D3nnycrane - Resume</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
   <style>
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background: #f4f6f8;
+      padding: 0;
+      background-color: #f4f6f8;
       color: #333;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-      overflow: hidden;
-      padding: 40px;
     }
 
     header {
+      background: #007acc;
+      color: white;
       text-align: center;
-      margin-bottom: 40px;
+      padding: 2rem 1rem;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
-      font-weight: 700;
+      font-size: 2.2rem;
     }
 
     header p {
-      margin-top: 8px;
-      color: #666;
+      margin: 0.5rem 0;
     }
 
-    .contact a {
+    header a {
+      color: #ffffff;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    header a:hover {
+      text-decoration: underline;
+      color: #d0e8ff; /* soft light blue hover color */
+    }
+
+    a {
       color: #007acc;
       text-decoration: none;
-      margin: 0 8px;
-      font-weight: 500;
     }
 
-    h2.main-section {
-      margin-top: 40px;
-      font-size: 1.5rem;
-      color: #007acc;
+    a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    h2 {
       border-bottom: 2px solid #007acc;
-      padding-bottom: 6px;
-    }
-
-    h3 {
-      margin-bottom: 4px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      padding-bottom: 0.3rem;
+      color: #007acc;
     }
 
     ul {
-      margin: 10px 0 20px 20px;
+      list-style-type: none;
+      padding: 0;
     }
 
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    li {
+      margin-bottom: 0.5rem;
     }
 
-    .skill-tag {
-      background: #007acc;
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 500;
+    /* Button styling */
+    .download-btn {
+      display: inline-block;
+      background-color: #007acc;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+      margin-top: 15px;
     }
 
-    /* Projects section styling */
-    .projects {
-      margin-top: 40px;
+    .download-btn:hover {
+      background-color: #005fa3;
     }
 
-    .projects h2 {
-      color: #007acc;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #007acc;
-      padding-bottom: 6px;
+    /* Projects section */
+    #projects {
+      background: #fafafa;
+      border-top: 2px solid #007acc;
+      padding: 2rem 1rem;
+    }
+
+    #projects h2 {
+      text-align: center;
     }
 
     .project-card {
-      background: #f0f4f8;
+      background: #fff;
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 15px;
-      margin-bottom: 20px;
+      margin: 1rem auto;
       transition: transform 0.2s, box-shadow 0.2s;
+      max-width: 700px;
     }
 
     .project-card h3 {
@@ -128,108 +144,97 @@
       transform: translateY(-3px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 0.85rem;
-      color: #777;
-    }
-
-    @media (max-width: 800px) {
-      .container {
-        padding: 20px;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <h1>Mark Haakma</h1>
-      <p><em>Cybersecurity & Compliance Specialist | Never Stop Learning</em></p>	
-      <p class="contact">
-        📧 <a href="mailto:mark.haakma@anz.com">mark.haakma@anz.com</a> | 
-        🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153/">LinkedIn</a> | 
-        💻 <a href="https://github.com/D3nnycrane">GitHub</a>
-      </p>
-    </header>
 
-    <!-- Profile -->
+  <header>
+    <h1>D3nnycrane</h1>
+    <p class="contact">
+      📧 <a href="mailto:mjhaakma@gmail.com">mjhaakma@gmail.com</a> |
+      🌐 <a href="https://linkedin.com/in/yourname">LinkedIn</a> |
+      💻 <a href="https://github.com/D3nnycrane">GitHub</a>
+    </p>
+    <p><em>Cybersecurity & Compliance Enthusiast | Future AI Security Engineer</em></p>
+    <button id="downloadPdf" class="download-btn">📄 Export Resume as PDF</button>
+  </header>
+
+  <main id="resume-content">
     <section>
-      <h2 class="main-section">Profile</h2>
+      <h2>Summary</h2>
       <p>A cybersecurity compliance analyst with 7+ years of experience across security operations, compliance baselining, and stakeholder reporting. Currently expanding into technical security engineering and AI-driven defense.</p>
     </section>
 
-    <!-- Experience -->
     <section>
-      <h2 class="main-section">Experience</h2>
-      <h3>Security Compliance Analyst – ANZ New Zealand</h3>
-      <p><em>June 2023 – Present</em></p>
+      <h2>Skills</h2>
       <ul>
-        <li>Performed compliance analysis and reporting across CIS, NIST, and ISO frameworks.</li>
-        <li>Worked with cross-functional teams to ensure cybersecurity controls were implemented.</li>
-        <li>Built dashboards and reports for executives on compliance posture and risk metrics.</li>
-      </ul>
-
-      <h3>Systems Operator – US State Department</h3>
-      <p><em>January 2019 – June 2023</em></p>
-      <ul>
-        <li>Managed Windows/Linux servers and implemented security hardening across environments.</li>
-        <li>Automated patching and reporting processes with PowerShell and Bash scripts.</li>
+        <li>🛡️ Governance, Risk & Compliance (GRC)</li>
+        <li>🔍 Threat Analysis & Vulnerability Management</li>
+        <li>🧠 AI-assisted Security Automation</li>
+        <li>📊 Reporting & Stakeholder Communication</li>
+        <li>💾 System Administration (Windows & Linux)</li>
       </ul>
     </section>
 
-    <!-- Education & Certifications -->
     <section>
-      <h2 class="main-section">Education & Certifications</h2>
+      <h2>Experience</h2>
+      <p><strong>Security Operations Analyst – GRC Team</strong><br>
+      <em>Company Name | 2018–Present</em></p>
       <ul>
-        <li>CompTIA CySA+ (202X)</li>
-        <li>Bachelor’s Degree in [Your Field]</li>
+        <li>Maintained compliance baselines using Tripwire Enterprise.</li>
+        <li>Worked with Imperva for web application protection and data security.</li>
+        <li>Led reporting and metrics initiatives between teams.</li>
+        <li>Developed scripts and automation for compliance verification.</li>
       </ul>
     </section>
 
-    <!-- Skills -->
     <section>
-      <h2 class="main-section">Skills</h2>
-      <div class="skills">
-        <span class="skill-tag">Cybersecurity</span>
-        <span class="skill-tag">Compliance</span>
-        <span class="skill-tag">Linux</span>
-        <span class="skill-tag">Networking</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">PowerShell</span>
-        <span class="skill-tag">Risk Analysis</span>
-      </div>
+      <h2>Certifications</h2>
+      <ul>
+        <li>CompTIA CySA+</li>
+        <li>Additional certs or training here...</li>
+      </ul>
     </section>
 
-    <!-- Projects -->
-    <section class="projects">
-      <h2>Projects</h2>
-
-      <div class="project-card">
-        <h3>Home Lab Setup Guide</h3>
-        <p>A step-by-step guide showing how I built a professional home lab from scratch, including networking, virtualization, and server setup.</p>
-        <a href="https://your-substack-link.com/home-lab-guide" target="_blank">Read More</a>
-      </div>
-
-      <div class="project-card">
-        <h3>Cybersecurity Dashboard</h3>
-        <p>Developed a dashboard for monitoring compliance metrics and alerts using Python and PowerShell automation scripts.</p>
-        <a href="https://your-substack-link.com/cyber-dashboard" target="_blank">Read More</a>
-      </div>
-
-      <div class="project-card">
-        <h3>Automation Scripts Collection</h3>
-        <p>A curated collection of PowerShell and Bash scripts for automating routine sysadmin and compliance tasks.</p>
-        <a href="https://your-substack-link.com/automation-scripts" target="_blank">Read More</a>
-      </div>
+    <section>
+      <h2>Education</h2>
+      <p><strong>Institution Name</strong><br>
+      Bachelor of Information Technology or similar<br>
+      Year of Graduation</p>
     </section>
+  </main>
 
-    <footer>
-      © 2025 D3nnycrane. All rights reserved.
-    </footer>
-  </div>
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="project-card">
+      <h3>Home Lab Setup Guide</h3>
+      <p>A step-by-step guide on building an enterprise-grade home lab environment, covering virtualization, networking, and automation.</p>
+      <a href="https://your-substack-link.com/home-lab-guide" target="_blank">Read More</a>
+    </div>
+
+    <div class="project-card">
+      <h3>AI-Assisted Threat Detection</h3>
+      <p>Exploration of using machine learning models for anomaly detection in cybersecurity logs using open-source tools.</p>
+      <a href="#" target="_blank">Read More</a>
+    </div>
+  </section>
+
+  <!-- JS for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    document.getElementById("downloadPdf").addEventListener("click", function() {
+      const element = document.getElementById("resume-content");
+      const options = {
+        margin: 0.5,
+        filename: 'D3nnycrane_Resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(options).from(element).save();
+    });
+  </script>
+
 </body>
 </html>
