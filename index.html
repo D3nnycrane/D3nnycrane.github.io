@@ -85,7 +85,8 @@
 
     /* Button styling */
     .download-btn {
-      display: inline-block;
+      top: 20px;          /* adjust to visually place it where you want */
+      right: 20px;
       background-color: #007acc;
       color: white;
       padding: 10px 16px;
@@ -93,12 +94,30 @@
       text-decoration: none;
       font-weight: 600;
       transition: background 0.2s;
-      margin-top: 15px;
+      z-index: 1000;       /* ensures it’s on top */
     }
 
     .download-btn:hover {
       background-color: #005fa3;
     }
+
+    .button-wrapper {
+      height: 50px; /* reserve space for the button */
+      text-align: center;
+    }
+    
+    .download-btn {
+      display: inline-block; /* normal flow */
+      margin-top: 15px;
+      background-color: #007acc;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
 
     /* Projects section */
     #projects {
@@ -145,19 +164,31 @@
       transform: translateY(-3px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
+
+    @media print {
+      #downloadPdf {
+      visibility: hidden !important;
+  }
+      #projects {
+      display: none !important;
+  }
+}
   </style>
 </head>
 <body>
 
+ <div id="resume-export"> 
   <header>
-    <h1>D3nnycrane</h1>
+    <h1>Mark J. Haakma</h1>
     <p class="contact">
       📧 <a href="mailto:mjhaakma@gmail.com">mjhaakma@gmail.com</a> |
       🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153/">LinkedIn</a> |
       💻 <a href="https://github.com/D3nnycrane">GitHub</a>
     </p>
     <p><em>Cybersecurity & Compliance Enthusiast | Future AI Security Engineer</em></p>
-    <button id="downloadPdf" class="download-btn">📄 Export Resume as PDF</button>
+    <div class="button-wrapper">
+      <button id="downloadPdf" class="download-btn">📄 Export Resume as PDF</button>
+    </div>
   </header>
 
   <main id="resume-content">
@@ -204,6 +235,7 @@
       Year of Graduation</p>
     </section>
   </main>
+  </div>
 
   <section id="projects">
     <h2>Projects</h2>
@@ -221,11 +253,16 @@
     </div>
   </section>
 
-  <!-- JS for PDF export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script>
+<!-- JS for PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
   document.getElementById("downloadPdf").addEventListener("click", function() {
-    const element = document.body; // now includes the header
+    const element = document.getElementById("resume-export");
+    const button = document.getElementById("downloadPdf");
+
+    // Temporarily hide the button to exclude from PDF
+    button.style.display = "none";
+
     const options = {
       margin: 0.5,
       filename: 'D3nnycrane_Resume.pdf',
@@ -233,9 +270,15 @@
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
-    html2pdf().set(options).from(element).save();
+
+    // Generate the PDF
+    html2pdf().set(options).from(element).save().then(() => {
+      // Restore the button immediately after PDF generation
+      button.style.display = "inline-block";
+    });
   });
-  </script>
+</script>
+
 
 </body>
 </html>
