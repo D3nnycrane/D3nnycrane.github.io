@@ -26,7 +26,7 @@
       display: inline-block;
     }
 
-  header h1::after {
+    header h1::after {
       content: "";
       position: absolute;
       bottom: -5px;
@@ -53,7 +53,7 @@
 
     header a:hover {
       text-decoration: underline;
-      color: #d0e8ff; /* soft light blue hover color */
+      color: #d0e8ff;
     }
 
     a {
@@ -115,7 +115,7 @@
       font-weight: 600;
       font-family: 'Roboto', sans-serif;
       position: relative;
-      overflow: hidden; /* important for shimmer mask */
+      overflow: hidden;
       transition: background 0.3s, box-shadow 0.3s;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     }
@@ -141,12 +141,8 @@
     }
 
     @keyframes shimmer {
-      0% {
-        left: -75%;
-      }
-      100% {
-        left: 125%;
-      }
+      0% { left: -75%; }
+      100% { left: 125%; }
     }
 
     .download-btn:hover {
@@ -157,7 +153,7 @@
     .rotating-text {
       font-style: italic;
       font-size: 1.1rem;
-      min-height: 1.4em; /* prevents layout jump */
+      min-height: 1.4em;
       overflow: hidden;
       display: inline-block;
       position: relative;
@@ -167,7 +163,6 @@
       opacity: 0;
       transition: opacity 0.8s ease-in-out;
     }
-
 
     /* Projects section */
     #projects {
@@ -215,19 +210,60 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
+    /* Skills grid and bars */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap; /* allow level to wrap to next line if needed */
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .skill-bar {
+      position: relative;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      height: 16px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #007acc, #33b5e5, #007acc);
+      background-size: 200% 100%;
+      width: 0%;
+      animation: shimmer 2s infinite linear;
+      transition: width 1.5s ease-in-out;
+    }
+
     @media print {
       #downloadPdf {
-      visibility: hidden !important;
+        visibility: hidden !important;
       }   
       #projects {
-      display: none !important;
+        display: none !important;
       }
     }   
   </style>
 </head>
 <body>
 
- <div id="resume-export"> 
+<div id="resume-export"> 
   <header>
     <h1>Mark J. Haakma</h1>
     <p class="contact">
@@ -250,14 +286,34 @@
     </section>
 
     <section>
-      <h2>Skills</h2>
-      <ul>
-        <li>🛡️ Governance, Risk & Compliance (GRC)</li>
-        <li>🔍 Threat Analysis & Vulnerability Management</li>
-        <li>🧠 AI-assisted Security Automation</li>
-        <li>📊 Reporting & Stakeholder Communication</li>
-        <li>💾 System Administration (Windows & Linux)</li>
-      </ul>
+      <h2>Skills & Tools</h2>
+      <div class="skills-grid">
+        <!-- Example skills -->
+        <div class="skill">
+          <div class="skill-label"><span>Python</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-level="90"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-label"><span>Tripwire Enterprise</span><span>Intermediate</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-level="65"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-label"><span>Azure AI</span><span>Intermediate</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-level="70"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-label"><span>GRC Compliance</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-level="85"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-label"><span>Linux Admin</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-level="80"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-label"><span>Windows Admin</span><span>Intermediate</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-level="70"></div></div>
+        </div>
+      </div>
     </section>
 
     <section>
@@ -276,7 +332,7 @@
       <h2>Certifications</h2>
       <ul>
         <li>CompTIA CySA+</li>
-        <li>Additional certs or training here...</li>
+        <li>AI-102 Certified Azure AI Developer</li>
       </ul>
     </section>
 
@@ -287,89 +343,93 @@
       Year of Graduation</p>
     </section>
   </main>
+</div>
+
+<section id="projects">
+  <h2>Projects</h2>
+
+  <div class="project-card">
+    <h3>Home Lab Setup Guide</h3>
+    <p>A step-by-step guide on building an enterprise-grade home lab environment, covering virtualization, networking, and automation.</p>
+    <a href="https://your-substack-link.com/home-lab-guide" target="_blank">Read More</a>
   </div>
 
-  <section id="projects">
-    <h2>Projects</h2>
+  <div class="project-card">
+    <h3>AI-Assisted Threat Detection</h3>
+    <p>Exploration of using machine learning models for anomaly detection in cybersecurity logs using open-source tools.</p>
+    <a href="#" target="_blank">Read More</a>
+  </div>
+</section>
 
-    <div class="project-card">
-      <h3>Home Lab Setup Guide</h3>
-      <p>A step-by-step guide on building an enterprise-grade home lab environment, covering virtualization, networking, and automation.</p>
-      <a href="https://your-substack-link.com/home-lab-guide" target="_blank">Read More</a>
-    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  document.getElementById("downloadPdf").addEventListener("click", function() {
+    const element = document.getElementById("resume-export");
+    const button = document.getElementById("downloadPdf");
+    button.style.display = "none";
 
-    <div class="project-card">
-      <h3>AI-Assisted Threat Detection</h3>
-      <p>Exploration of using machine learning models for anomaly detection in cybersecurity logs using open-source tools.</p>
-      <a href="#" target="_blank">Read More</a>
-    </div>
-  </section>
+    const options = {
+      margin: 0.5,
+      filename: 'Mark_J_Haakma_Resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
 
-<!-- JS for PDF export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script>
-    document.getElementById("downloadPdf").addEventListener("click", function() {
-      const element = document.getElementById("resume-export");
-      const button = document.getElementById("downloadPdf");
-
-      // Temporarily hide the button to exclude from PDF
-      button.style.display = "none";
-
-      const options = {
-        margin: 0.5,
-        filename: 'Mark_J_Haakma_Resume.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-
-      // Generate the PDF
-      html2pdf().set(options).from(element).save().then(() => {
-        // Restore the button immediately after PDF generation
-        button.style.display = "inline-block";
-      });
+    html2pdf().set(options).from(element).save().then(() => {
+      button.style.display = "inline-block";
     });
-  </script>
+  });
+</script>
 
-  <script>
-    const roles = [
-      "Cybersecurity & Compliance Specialist",
-      "AI-102 Certified Azure AI Developer",
-      "Top 1% All-Time TryHackMe",
-    ];
+<script>
+  // Rotating text logic
+  const roles = [
+    "Cybersecurity & Compliance Specialist",
+    "AI-102 Certified Azure AI Developer",
+    "Top 1% All-Time TryHackMe",
+  ];
 
-    const roleText = document.getElementById("role-text");
-    let currentIndex = 0;
-    let intervalId = null;
+  const roleText = document.getElementById("role-text");
+  let currentIndex = 0;
+  let intervalId = null;
 
-    function startRotation() {
-      intervalId = setInterval(() => {
-        roleText.classList.add("fade");
+  function startRotation() {
+    intervalId = setInterval(() => {
+      roleText.classList.add("fade");
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % roles.length;
+        roleText.textContent = roles[currentIndex];
+        roleText.classList.remove("fade");
+      }, 800);
+    }, 3000);
+  }
 
-        setTimeout(() => {
-          currentIndex = (currentIndex + 1) % roles.length;
-          roleText.textContent = roles[currentIndex];
-          roleText.classList.remove("fade");
-        }, 800); // matches CSS transition time
-      }, 3000); // 3 seconds per rotation
+  const mediaQueryList = window.matchMedia("print");
+  mediaQueryList.addEventListener("change", (mql) => {
+    if (mql.matches) {
+      clearInterval(intervalId);
+      roleText.textContent = roles[0];
+    } else {
+      startRotation();
     }
+  });
 
-    // Detect if we're exporting/printing to PDF
-    const mediaQueryList = window.matchMedia("print");
+  startRotation();
+</script>
 
-    mediaQueryList.addEventListener("change", (mql) => {
-      if (mql.matches) {
-        // PDF/print mode → stop rotation and reset text
-        clearInterval(intervalId);
-        roleText.textContent = roles[0];
-      } else {
-        // Back to screen view → resume animation
-        startRotation();
-      }
+<script>
+  // Skill bars progressive fill with stagger
+  window.addEventListener("load", () => {
+    const bars = document.querySelectorAll(".skill-bar-fill");
+    bars.forEach((bar, index) => {
+      const level = bar.getAttribute("data-level");
+      setTimeout(() => {
+        bar.style.width = level + "%";
+      }, index * 250); // stagger: 250ms between each bar
     });
+  });
+</script>
 
-    // Start the rotation by default
-    startRotation();
-  </script>
-  </body>
+</body>
 </html>
