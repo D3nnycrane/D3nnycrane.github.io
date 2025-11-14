@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D3nnycrane - Resume</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark J. Haakma - Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+
   <style>
     body {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -12,16 +13,20 @@
       padding: 0;
       background-color: #f4f6f8;
       color: #333;
+      scroll-behavior: smooth;
     }
 
+    /* Header */
     header {
       background: #007acc;
       color: white;
       text-align: center;
       padding: 2rem 1rem;
+      position: relative;
     }
 
     header h1 {
+      margin-bottom: 0.2rem;
       position: relative;
       display: inline-block;
     }
@@ -38,11 +43,9 @@
     }
 
     @keyframes underline {
-      to { width: 100%; }
-    }
-
-    header p {
-      margin: 0.5rem 0;
+      to {
+        width: 100%;
+      }
     }
 
     header a {
@@ -56,15 +59,46 @@
       color: #d0e8ff;
     }
 
-    a {
-      color: #007acc;
-      text-decoration: none;
+    /* Rotating role text */
+    .rotating-text {
+      font-style: italic;
+      font-size: 1.1rem;
+      min-height: 1.4em;
+      overflow: hidden;
+      display: inline-block;
+      position: relative;
     }
 
-    a:hover {
+    .fade {
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    /* Navigation Bar */
+    nav.jump-nav {
+      background: #ffffff;
+      border-bottom: 2px solid #007acc22;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav.jump-nav a {
+      text-decoration: none;
+      color: #007acc;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    nav.jump-nav a:hover {
       text-decoration: underline;
     }
 
+    /* Layout */
     main {
       display: flex;
       flex-direction: column;
@@ -77,7 +111,7 @@
     section {
       background: white;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       padding: 1.5rem;
       margin-bottom: 2rem;
       width: 100%;
@@ -90,30 +124,83 @@
       text-align: center;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+    /* Skill Bars */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 0.5rem;
     }
 
-    li {
-      margin-bottom: 0.5rem;
+    .skill-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .skill-bar-wrapper {
+      background: #e0e6eb;
+      border-radius: 20px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #007acc, #37a1ff, #007acc);
+      background-size: 200%;
+      border-radius: 20px;
+      animation: shine 2s infinite linear;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0%; }
+      100% { background-position: 200%; }
+    }
+
+    /* Projects section */
+    #projects {
+      background: #fafafa;
+      border-top: 2px solid #007acc;
+      padding: 2rem 1rem;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 1rem auto;
+      transition: 0.2s;
+      max-width: 700px;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .button-wrapper {
-      height: 50px;
       text-align: center;
+      margin-top: 1rem;
     }
 
     .download-btn {
       display: inline-block;
-      margin-top: 15px;
       background-color: #007acc;
       color: white;
       padding: 10px 16px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       position: relative;
       overflow: hidden;
       transition: background 0.3s, box-shadow 0.3s;
@@ -141,295 +228,208 @@
     }
 
     @keyframes shimmer {
-      0% { left: -75%; }
-      100% { left: 125%; }
-    }
-
-    .download-btn:hover {
-      background-color: #005fa3;
-      box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.35);
-    }
-
-    .rotating-text {
-      font-style: italic;
-      font-size: 1.1rem;
-      min-height: 1.4em;
-      overflow: hidden;
-      display: inline-block;
-      position: relative;
-    }
-
-    .fade {
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-
-    /* Projects section */
-    #projects {
-      background: #fafafa;
-      border-top: 2px solid #007acc;
-      padding: 2rem 1rem;
-    }
-
-    #projects h2 {
-      text-align: center;
-    }
-
-    .project-card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 1rem auto;
-      transition: transform 0.2s, box-shadow 0.2s;
-      max-width: 700px;
-    }
-
-    .project-card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 1.1rem;
-      color: #007acc;
-    }
-
-    .project-card p {
-      font-size: 0.9rem;
-      color: #444;
-    }
-
-    .project-card a {
-      display: inline-block;
-      margin-top: 8px;
-      text-decoration: none;
-      color: #007acc;
-      font-weight: 500;
-    }
-
-    .project-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    /* Skills grid and bars */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-
-    .skill {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
-    }
-
-    .skill-label {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap; /* allow level to wrap to next line if needed */
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .skill-bar {
-      position: relative;
-      background-color: #e0e0e0;
-      border-radius: 10px;
-      height: 16px;
-      width: 100%;
-      overflow: hidden;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
-    }
-
-    .skill-bar-fill {
-      height: 100%;
-      border-radius: 10px;
-      background: linear-gradient(90deg, #007acc, #33b5e5, #007acc);
-      background-size: 200% 100%;
-      width: 0%;
-      animation: shimmer 2s infinite linear;
-      transition: width 1.5s ease-in-out;
+      from { left: -75%; }
+      to { left: 125%; }
     }
 
     @media print {
-      #downloadPdf {
-        visibility: hidden !important;
-      }   
-      #projects {
+      nav.jump-nav,
+      #projects,
+      .download-btn {
         display: none !important;
       }
-    }   
+    }
   </style>
 </head>
+
 <body>
+  <div id="resume-export">
+    <header>
+      <h1>Mark J. Haakma</h1>
 
-<div id="resume-export"> 
-  <header>
-    <h1>Mark J. Haakma</h1>
-    <p class="contact">
-      📧 <a href="mailto:mjhaakma@gmail.com">mjhaakma@gmail.com</a> |
-      🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153/">LinkedIn</a> |
-      💻 <a href="https://github.com/D3nnycrane">GitHub</a>
-    </p>
-    <p class="rotating-text">
-      <em id="role-text">Cybersecurity & Compliance Specialist</em>
-    </p>
-    <div class="button-wrapper">
-      <button id="downloadPdf" class="download-btn">📄 Export Resume as PDF</button>
-    </div>
-  </header>
+      <p class="contact">
+        📧 <a href="mailto:mjhaakma@gmail.com">mjhaakma@gmail.com</a> |
+        🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153/">LinkedIn</a> |
+        💻 <a href="https://github.com/D3nnycrane">GitHub</a>
+      </p>
 
-  <main id="resume-content">
-    <section>
-      <h2>Summary</h2>
-      <p>A cybersecurity compliance analyst with 7+ years of experience across security operations, compliance baselining, and stakeholder reporting. Currently expanding into technical security engineering and AI-driven defense.</p>
-    </section>
+      <p class="rotating-text">
+        <em id="role-text">Cybersecurity & Compliance Specialist</em>
+      </p>
 
-    <section>
-      <h2>Skills & Tools</h2>
-      <div class="skills-grid">
-        <!-- Example skills -->
-        <div class="skill">
-          <div class="skill-label"><span>Python</span><span>Intermediate</span></div>
-          <div class="skill-bar"><div class="skill-bar-fill" data-level="50"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-label"><span>Tripwire Enterprise</span><span>Proficient</span></div>
-          <div class="skill-bar"><div class="skill-bar-fill" data-level="95"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-label"><span>Azure AI</span><span>Intermediate</span></div>
-          <div class="skill-bar"><div class="skill-bar-fill" data-level="70"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-label"><span>GRC Compliance</span><span>Proficient</span></div>
-          <div class="skill-bar"><div class="skill-bar-fill" data-level="90"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-label"><span>Linux Admin</span><span>Proficient</span></div>
-          <div class="skill-bar"><div class="skill-bar-fill" data-level="80"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-label"><span>Windows Admin</span><span>Intermediate</span></div>
-          <div class="skill-bar"><div class="skill-bar-fill" data-level="70"></div></div>
-        </div>
+      <div class="button-wrapper">
+        <a class="download-btn" href="Mark Haakma - Resume.pdf" download>
+          📄 Download Resume (PDF)
+        </a>
       </div>
-    </section>
+    </header>
 
-    <section>
-      <h2>Experience</h2>
-      <p><strong>Security Operations Analyst – GRC Team</strong><br>
-      <em>Company Name | 2018–Present</em></p>
-      <ul>
-        <li>Maintained compliance baselines using Tripwire Enterprise.</li>
-        <li>Worked with Imperva for web application protection and data security.</li>
-        <li>Led reporting and metrics initiatives between teams.</li>
-        <li>Developed scripts and automation for compliance verification.</li>
-      </ul>
-    </section>
+    <!-- Navigation -->
+    <nav class="jump-nav">
+      <a href="#summary">Summary</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+    </nav>
 
-    <section>
-      <h2>Certifications</h2>
-      <ul>
-        <li>CompTIA CySA+</li>
-        <li>AI-102 Certified Azure AI Developer</li>
-      </ul>
-    </section>
+    <main id="resume-content">
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>
+          A cybersecurity compliance analyst with 7+ years of experience across security
+          operations, compliance baselining, and stakeholder reporting. Expanding into
+          technical security engineering and AI-driven defense.
+        </p>
+      </section>
 
-    <section>
-      <h2>Education</h2>
-      <p><strong>Institution Name</strong><br>
-      Bachelor of Information Technology or similar<br>
-      Year of Graduation</p>
-    </section>
-  </main>
-</div>
+      <section id="skills">
+        <h2>Skills & Tools</h2>
 
-<section id="projects">
-  <h2>Projects</h2>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <span class="skill-label">Python</span>
+            <div class="skill-bar-wrapper">
+              <div class="skill-bar" data-skill="85"></div>
+            </div>
+          </div>
 
-  <div class="project-card">
-    <h3>Home Lab Setup Guide</h3>
-    <p>A step-by-step guide on building an enterprise-grade home lab environment, covering virtualization, networking, and automation.</p>
-    <a href="https://your-substack-link.com/home-lab-guide" target="_blank">Read More</a>
+          <div class="skill-item">
+            <span class="skill-label">Tripwire Enterprise</span>
+            <div class="skill-bar-wrapper">
+              <div class="skill-bar" data-skill="90"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-label">Imperva</span>
+            <div class="skill-bar-wrapper">
+              <div class="skill-bar" data-skill="70"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-label">Linux</span>
+            <div class="skill-bar-wrapper">
+              <div class="skill-bar" data-skill="80"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-label">Windows Server</span>
+            <div class="skill-bar-wrapper">
+              <div class="skill-bar" data-skill="75"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <span class="skill-label">AI Security</span>
+            <div class="skill-bar-wrapper">
+              <div class="skill-bar" data-skill="65"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <h2>Experience</h2>
+        <p><strong>Security Operations Analyst — GRC Team</strong><br />
+          <em>Company Name | 2018–Present</em>
+        </p>
+        <ul>
+          <li>Maintained compliance baselines using Tripwire Enterprise.</li>
+          <li>Worked with Imperva for web application protection and data security.</li>
+          <li>Led reporting and metrics initiatives between teams.</li>
+          <li>Developed scripts and automation for compliance verification.</li>
+        </ul>
+      </section>
+
+      <section id="certifications">
+        <h2>Certifications</h2>
+        <ul>
+          <li>CompTIA CySA+</li>
+          <li>AI-102 Azure AI Engineer (In Progress)</li>
+          <li>More certifications coming…</li>
+        </ul>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+        <p><strong>Institution Name</strong><br />
+          Bachelor of Information Technology or similar<br />
+          Year of Graduation</p>
+      </section>
+    </main>
   </div>
 
-  <div class="project-card">
-    <h3>AI-Assisted Threat Detection</h3>
-    <p>Exploration of using machine learning models for anomaly detection in cybersecurity logs using open-source tools.</p>
-    <a href="#" target="_blank">Read More</a>
-  </div>
-</section>
+  <section id="projects">
+    <h2>Projects</h2>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-  document.getElementById("downloadPdf").addEventListener("click", function() {
-    const element = document.getElementById("resume-export");
-    const button = document.getElementById("downloadPdf");
-    button.style.display = "none";
+    <div class="project-card">
+      <h3>Home Lab Setup Guide</h3>
+      <p>A step-by-step guide on building an enterprise-grade home lab environment with virtualization, networking, and automation.</p>
+      <a href="#" target="_blank">Read More</a>
+    </div>
 
-    const options = {
-      margin: 0.5,
-      filename: 'Mark_J_Haakma_Resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
+    <div class="project-card">
+      <h3>AI-Assisted Threat Detection</h3>
+      <p>Using ML models for anomaly detection in cybersecurity logs using open-source tooling.</p>
+      <a href="#" target="_blank">Read More</a>
+    </div>
+  </section>
 
-    html2pdf().set(options).from(element).save().then(() => {
-      button.style.display = "inline-block";
-    });
-  });
-</script>
+  <!-- Rotating Text + Skill Bars JS -->
+  <script>
+    /* Rotating Role Text */
+    const roles = [
+      "Cybersecurity & Compliance Specialist",
+      "AI-102 Certified Azure AI Developer",
+      "Top 1% All-Time TryHackMe"
+    ];
+    const roleText = document.getElementById("role-text");
+    let idx = 0;
+    let rotationInterval;
 
-<script>
-  // Rotating text logic
-  const roles = [
-    "Cybersecurity & Compliance Specialist",
-    "AI-102 Certified Azure AI Developer",
-    "Top 1% All-Time TryHackMe",
-  ];
+    function startRotation() {
+      rotationInterval = setInterval(() => {
+        roleText.classList.add("fade");
 
-  const roleText = document.getElementById("role-text");
-  let currentIndex = 0;
-  let intervalId = null;
-
-  function startRotation() {
-    intervalId = setInterval(() => {
-      roleText.classList.add("fade");
-      setTimeout(() => {
-        currentIndex = (currentIndex + 1) % roles.length;
-        roleText.textContent = roles[currentIndex];
-        roleText.classList.remove("fade");
-      }, 800);
-    }, 3000);
-  }
-
-  const mediaQueryList = window.matchMedia("print");
-  mediaQueryList.addEventListener("change", (mql) => {
-    if (mql.matches) {
-      clearInterval(intervalId);
-      roleText.textContent = roles[0];
-    } else {
-      startRotation();
+        setTimeout(() => {
+          idx = (idx + 1) % roles.length;
+          roleText.textContent = roles[idx];
+          roleText.classList.remove("fade");
+        }, 800);
+      }, 3000);
     }
-  });
 
-  startRotation();
-</script>
-
-<script>
-  // Skill bars progressive fill with stagger
-  window.addEventListener("load", () => {
-    const bars = document.querySelectorAll(".skill-bar-fill");
-    bars.forEach((bar, index) => {
-      const level = bar.getAttribute("data-level");
-      setTimeout(() => {
-        bar.style.width = level + "%";
-      }, index * 250); // stagger: 250ms between each bar
+    const printMQ = window.matchMedia("print");
+    printMQ.addEventListener("change", (e) => {
+      if (e.matches) {
+        clearInterval(rotationInterval);
+        roleText.textContent = roles[0];
+      } else {
+        startRotation();
+      }
     });
-  });
-</script>
 
+    startRotation();
+
+
+    /* Skill Bar Animations */
+    window.addEventListener("load", () => {
+      const bars = document.querySelectorAll(".skill-bar");
+      let delay = 0;
+
+      bars.forEach((bar) => {
+        const level = bar.getAttribute("data-skill");
+        setTimeout(() => {
+          bar.style.transition = "width 1.4s ease";
+          bar.style.width = level + "%";
+        }, delay);
+        delay += 250;
+      });
+    });
+  </script>
 </body>
 </html>
