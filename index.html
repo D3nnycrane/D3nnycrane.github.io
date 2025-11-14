@@ -16,7 +16,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Header */
     header {
       background: #007acc;
       color: white;
@@ -27,8 +26,8 @@
 
     header h1 {
       margin-bottom: 0.2rem;
-      position: relative;
       display: inline-block;
+      position: relative;
     }
 
     header h1::after {
@@ -44,18 +43,9 @@
 
     @keyframes underline { to { width: 100%; } }
 
-    header a {
-      color: #ffffff;
-      font-weight: 500;
-      text-decoration: none;
-    }
+    header a { color: #ffffff; font-weight: 500; text-decoration: none; }
+    header a:hover { text-decoration: underline; color: #d0e8ff; }
 
-    header a:hover {
-      text-decoration: underline;
-      color: #d0e8ff;
-    }
-
-    /* Rotating role text */
     .rotating-text {
       font-style: italic;
       font-size: 1.1rem;
@@ -67,9 +57,8 @@
 
     .fade { opacity: 0; transition: opacity 0.8s ease-in-out; }
 
-    /* Navigation Bar */
     nav.jump-nav {
-      background: #ffffff;
+      background: #fff;
       border-bottom: 2px solid #007acc22;
       padding: 0.5rem 1rem;
       display: flex;
@@ -89,7 +78,6 @@
 
     nav.jump-nav a:hover { text-decoration: underline; }
 
-    /* Layout */
     main {
       display: flex;
       flex-direction: column;
@@ -102,7 +90,7 @@
     section {
       background: white;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       padding: 1.5rem;
       margin-bottom: 2rem;
       width: 100%;
@@ -147,7 +135,6 @@
       background: linear-gradient(90deg, #007acc, #37a1ff, #007acc);
       background-size: 200%;
       border-radius: 20px;
-      overflow: hidden;
     }
 
     .skill-bar::before {
@@ -173,7 +160,21 @@
 
     @keyframes shine { from { left: -75%; } to { left: 125%; } }
 
-    /* Projects section */
+    /* Experience separator with pulsing glow, section width only */
+    .role-separator {
+      height: 4px;
+      width: 100%; /* matches section width */
+      border-radius: 2px;
+      background: linear-gradient(90deg, #007acc, #37a1ff, #007acc);
+      margin: 1.5rem 0;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; box-shadow: 0 0 5px #37a1ff; }
+      50% { opacity: 1; box-shadow: 0 0 15px #37a1ff; }
+    }
+
     #projects { background: #fafafa; border-top: 2px solid #007acc; padding: 2rem 1rem; }
 
     .project-card {
@@ -188,7 +189,7 @@
 
     .project-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
     .button-wrapper {
@@ -208,7 +209,7 @@
       position: relative;
       overflow: hidden;
       transition: background 0.3s, box-shadow 0.3s;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
 
     .download-btn::before {
@@ -227,9 +228,7 @@
       transform: skewX(-25deg);
     }
 
-    .download-btn:hover::before {
-      animation: shimmer 1.5s forwards;
-    }
+    .download-btn:hover::before { animation: shimmer 1.5s forwards; }
 
     @media print {
       nav.jump-nav,
@@ -243,10 +242,9 @@
   <div id="resume-export">
     <header>
       <h1>Mark J. Haakma</h1>
-
       <p class="contact">
-        📧 <a href="mailto:mjhaakma@gmail.com">Gmail</a> |
-        🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153">LinkedIn</a> |
+        📧 <a href="mailto:mjhaakma@gmail.com">mjhaakma@gmail.com</a> |
+        🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153">www.linkedin.com/in/mark-haakma-b286a6153</a> |
         💻 <a href="https://github.com/D3nnycrane">GitHub</a>
       </p>
 
@@ -290,7 +288,6 @@
             </div>
             <span class="skill-level"></span>
           </div>
-
           <div class="skill-item">
             <span class="skill-label">Tripwire Enterprise</span>
             <div class="skill-bar-wrapper">
@@ -298,7 +295,6 @@
             </div>
             <span class="skill-level"></span>
           </div>
-
           <div class="skill-item">
             <span class="skill-label">Imperva</span>
             <div class="skill-bar-wrapper">
@@ -306,7 +302,6 @@
             </div>
             <span class="skill-level"></span>
           </div>
-
           <div class="skill-item">
             <span class="skill-label">Linux</span>
             <div class="skill-bar-wrapper">
@@ -314,7 +309,6 @@
             </div>
             <span class="skill-level"></span>
           </div>
-
           <div class="skill-item">
             <span class="skill-label">Windows Server</span>
             <div class="skill-bar-wrapper">
@@ -322,7 +316,6 @@
             </div>
             <span class="skill-level"></span>
           </div>
-
           <div class="skill-item">
             <span class="skill-label">AI Security</span>
             <div class="skill-bar-wrapper">
@@ -335,6 +328,7 @@
 
       <section id="experience">
         <h2>Experience</h2>
+
         <p><strong>Security Operations Analyst — GRC Team</strong><br />
           <em>Company Name | 2018–Present</em>
         </p>
@@ -343,6 +337,17 @@
           <li>Worked with Imperva for web application protection and data security.</li>
           <li>Led reporting and metrics initiatives between teams.</li>
           <li>Developed scripts and automation for compliance verification.</li>
+        </ul>
+
+        <div class="role-separator"></div>
+
+        <p><strong>Security Operations Analyst — GRC Team</strong><br />
+          <em>Another Company | 2016–2018</em>
+        </p>
+        <ul>
+          <li>Implemented security monitoring tools across multiple environments.</li>
+          <li>Prepared compliance reports and dashboards for management.</li>
+          <li>Collaborated with IT teams on incident response and remediation.</li>
         </ul>
       </section>
 
@@ -419,7 +424,7 @@
         }, idx * 300);
       });
 
-      // Auto shimmer with smooth wave effect
+      // Auto shimmer for skill bars
       function triggerShimmer() {
         bars.forEach((bar, i) => {
           setTimeout(() => {
@@ -435,6 +440,7 @@
       `;
       document.head.appendChild(style);
 
+      setTimeout(triggerShimmer, 1000); 
       setInterval(triggerShimmer, 5000);
     });
   </script>
