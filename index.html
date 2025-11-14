@@ -42,11 +42,7 @@
       animation: underline 1.5s ease-out forwards;
     }
 
-    @keyframes underline {
-      to {
-        width: 100%;
-      }
-    }
+    @keyframes underline { to { width: 100%; } }
 
     header a {
       color: #ffffff;
@@ -69,10 +65,7 @@
       position: relative;
     }
 
-    .fade {
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
+    .fade { opacity: 0; transition: opacity 0.8s ease-in-out; }
 
     /* Navigation Bar */
     nav.jump-nav {
@@ -94,9 +87,7 @@
       font-size: 0.95rem;
     }
 
-    nav.jump-nav a:hover {
-      text-decoration: underline;
-    }
+    nav.jump-nav a:hover { text-decoration: underline; }
 
     /* Layout */
     main {
@@ -124,10 +115,10 @@
       text-align: center;
     }
 
-    /* Skill Bars */
+    /* Skills Section - 3 Column Grid */
     .skills-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       padding: 0.5rem;
     }
@@ -135,42 +126,55 @@
     .skill-item {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
     }
 
-    .skill-label {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
+    .skill-label { font-weight: 600; font-size: 0.95rem; }
+    .skill-level { font-size: 0.85rem; font-weight: 500; color: #007acc; margin-top: 2px; }
 
     .skill-bar-wrapper {
+      position: relative;
+      overflow: hidden;
       background: #e0e6eb;
       border-radius: 20px;
       height: 12px;
-      overflow: hidden;
-      position: relative;
     }
 
     .skill-bar {
+      position: relative;
       height: 100%;
       width: 0;
       background: linear-gradient(90deg, #007acc, #37a1ff, #007acc);
       background-size: 200%;
       border-radius: 20px;
-      animation: shine 2s infinite linear;
+      overflow: hidden;
     }
 
-    @keyframes shine {
-      0% { background-position: 0%; }
-      100% { background-position: 200%; }
+    .skill-bar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.4) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: skewX(-25deg);
+      pointer-events: none;
     }
+
+    .skill-bar-wrapper:hover .skill-bar::before {
+      animation: shine 1.2s forwards;
+    }
+
+    @keyframes shine { from { left: -75%; } to { left: 125%; } }
 
     /* Projects section */
-    #projects {
-      background: #fafafa;
-      border-top: 2px solid #007acc;
-      padding: 2rem 1rem;
-    }
+    #projects { background: #fafafa; border-top: 2px solid #007acc; padding: 2rem 1rem; }
 
     .project-card {
       background: #fff;
@@ -216,9 +220,9 @@
       height: 100%;
       background: linear-gradient(
         120deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.4) 50%,
-        rgba(255, 255, 255, 0) 100%
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.4) 50%,
+        rgba(255,255,255,0) 100%
       );
       transform: skewX(-25deg);
     }
@@ -227,17 +231,10 @@
       animation: shimmer 1.5s forwards;
     }
 
-    @keyframes shimmer {
-      from { left: -75%; }
-      to { left: 125%; }
-    }
-
     @media print {
       nav.jump-nav,
       #projects,
-      .download-btn {
-        display: none !important;
-      }
+      .download-btn { display: none !important; }
     }
   </style>
 </head>
@@ -248,8 +245,8 @@
       <h1>Mark J. Haakma</h1>
 
       <p class="contact">
-        📧 <a href="mailto:mjhaakma@gmail.com">mjhaakma@gmail.com</a> |
-        🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153/">LinkedIn</a> |
+        📧 <a href="mailto:mjhaakma@gmail.com">Gmail</a> |
+        🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153">LinkedIn</a> |
         💻 <a href="https://github.com/D3nnycrane">GitHub</a>
       </p>
 
@@ -264,7 +261,6 @@
       </div>
     </header>
 
-    <!-- Navigation -->
     <nav class="jump-nav">
       <a href="#summary">Summary</a>
       <a href="#skills">Skills</a>
@@ -286,13 +282,13 @@
 
       <section id="skills">
         <h2>Skills & Tools</h2>
-
         <div class="skills-grid">
           <div class="skill-item">
             <span class="skill-label">Python</span>
             <div class="skill-bar-wrapper">
               <div class="skill-bar" data-skill="85"></div>
             </div>
+            <span class="skill-level"></span>
           </div>
 
           <div class="skill-item">
@@ -300,6 +296,7 @@
             <div class="skill-bar-wrapper">
               <div class="skill-bar" data-skill="90"></div>
             </div>
+            <span class="skill-level"></span>
           </div>
 
           <div class="skill-item">
@@ -307,6 +304,7 @@
             <div class="skill-bar-wrapper">
               <div class="skill-bar" data-skill="70"></div>
             </div>
+            <span class="skill-level"></span>
           </div>
 
           <div class="skill-item">
@@ -314,6 +312,7 @@
             <div class="skill-bar-wrapper">
               <div class="skill-bar" data-skill="80"></div>
             </div>
+            <span class="skill-level"></span>
           </div>
 
           <div class="skill-item">
@@ -321,6 +320,7 @@
             <div class="skill-bar-wrapper">
               <div class="skill-bar" data-skill="75"></div>
             </div>
+            <span class="skill-level"></span>
           </div>
 
           <div class="skill-item">
@@ -328,6 +328,7 @@
             <div class="skill-bar-wrapper">
               <div class="skill-bar" data-skill="65"></div>
             </div>
+            <span class="skill-level"></span>
           </div>
         </div>
       </section>
@@ -365,13 +366,11 @@
 
   <section id="projects">
     <h2>Projects</h2>
-
     <div class="project-card">
       <h3>Home Lab Setup Guide</h3>
       <p>A step-by-step guide on building an enterprise-grade home lab environment with virtualization, networking, and automation.</p>
       <a href="#" target="_blank">Read More</a>
     </div>
-
     <div class="project-card">
       <h3>AI-Assisted Threat Detection</h3>
       <p>Using ML models for anomaly detection in cybersecurity logs using open-source tooling.</p>
@@ -379,22 +378,18 @@
     </div>
   </section>
 
-  <!-- Rotating Text + Skill Bars JS -->
   <script>
-    /* Rotating Role Text */
+    // Rotating Role Text
     const roles = [
       "Cybersecurity & Compliance Specialist",
       "AI-102 Certified Azure AI Developer",
       "Top 1% All-Time TryHackMe"
     ];
     const roleText = document.getElementById("role-text");
-    let idx = 0;
-    let rotationInterval;
-
+    let idx = 0, rotationInterval;
     function startRotation() {
       rotationInterval = setInterval(() => {
         roleText.classList.add("fade");
-
         setTimeout(() => {
           idx = (idx + 1) % roles.length;
           roleText.textContent = roles[idx];
@@ -402,33 +397,45 @@
         }, 800);
       }, 3000);
     }
-
     const printMQ = window.matchMedia("print");
-    printMQ.addEventListener("change", (e) => {
-      if (e.matches) {
-        clearInterval(rotationInterval);
-        roleText.textContent = roles[0];
-      } else {
-        startRotation();
-      }
+    printMQ.addEventListener("change", e => {
+      if(e.matches){ clearInterval(rotationInterval); roleText.textContent = roles[0]; }
+      else { startRotation(); }
     });
-
     startRotation();
 
-
-    /* Skill Bar Animations */
+    // Skill Bar Animation + Hover & Auto Shimmer
     window.addEventListener("load", () => {
       const bars = document.querySelectorAll(".skill-bar");
-      let delay = 0;
 
-      bars.forEach((bar) => {
-        const level = bar.getAttribute("data-skill");
+      // Progressive load & skill level labels
+      bars.forEach((bar, idx) => {
+        const level = parseInt(bar.getAttribute("data-skill"), 10);
         setTimeout(() => {
           bar.style.transition = "width 1.4s ease";
           bar.style.width = level + "%";
-        }, delay);
-        delay += 250;
+          const label = bar.parentElement.nextElementSibling;
+          label.textContent = level <= 40 ? "Beginner" : level <= 75 ? "Intermediate" : "Proficient";
+        }, idx * 300);
       });
+
+      // Auto shimmer with smooth wave effect
+      function triggerShimmer() {
+        bars.forEach((bar, i) => {
+          setTimeout(() => {
+            bar.classList.add("auto-shimmer");
+            setTimeout(() => bar.classList.remove("auto-shimmer"), 1200);
+          }, i * 200);
+        });
+      }
+
+      const style = document.createElement("style");
+      style.textContent = `
+        .skill-bar.auto-shimmer::before { animation: shine 1.2s forwards; }
+      `;
+      document.head.appendChild(style);
+
+      setInterval(triggerShimmer, 5000);
     });
   </script>
 </body>
