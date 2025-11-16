@@ -27,6 +27,21 @@
     header a { color: white; text-decoration: none; font-weight: 500; }
     header a:hover { text-decoration: underline; color: #d0e8ff; }
 
+    /* Return Home Button */
+    .return-home-btn {
+      display: inline-block;
+      background-color: #007acc;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+    .return-home-btn:hover {
+      background-color: #005ea0;
+    }
+
     nav.jump-nav {
       background: #fff;
       border-bottom: 2px solid #007acc22;
@@ -60,19 +75,15 @@
       width: 100%;
     }
 
-    h2 { 
-      border-bottom: 2px solid #007acc; 
-      padding-bottom: 0.3rem; 
-      color: #007acc; 
-      text-align: center; 
-    }
+    h2 { border-bottom: 2px solid #007acc; padding-bottom: 0.3rem; color: #007acc; text-align: center; }
 
     /* Tiles for OWASP */
     .owasp-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       margin-top: 1rem;
+      justify-content: center;
     }
 
     .owasp-card {
@@ -82,6 +93,9 @@
       padding: 15px;
       text-align: center;
       transition: transform 0.2s, box-shadow 0.2s;
+      max-width: 280px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .owasp-card:hover {
@@ -104,24 +118,11 @@
       background-color: #005ea0;
     }
 
-    /* Return Home Button */
-    .home-button {
-      display: inline-block;
-      background-color: #007acc;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
-      font-family: 'Roboto', sans-serif;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-      transition: background 0.3s, box-shadow 0.3s;
-      margin-top: 2rem;
-    }
-
-    .home-button:hover {
-      background-color: #005ea0;
-      box-shadow: 3px 3px 8px rgba(0,0,0,0.35);
+    /* Special flex container for the last row if single tile */
+    .owasp-last-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
     }
 
     @media print { nav.jump-nav { display: none !important; } }
@@ -134,6 +135,7 @@
     <p>
       <a href="../index.html">← Back to Resume</a>
     </p>
+    <a href="../index.html" class="return-home-btn">🏠 Return Home</a>
   </header>
 
   <nav class="jump-nav">
@@ -190,17 +192,18 @@
           <p>Lack of proper logging and monitoring can hide breaches.</p>
           <a href="A09-logging-monitoring.html" target="_blank">Read More</a>
         </div>
+      </div>
+
+      <!-- Last tile centered in its own row -->
+      <div class="owasp-last-row">
         <div class="owasp-card">
           <h3>A10: Server-Side Request Forgery (SSRF)</h3>
           <p>Server accepts and acts upon unvalidated user-supplied URLs.</p>
           <a href="A10-ssrf.html" target="_blank">Read More</a>
         </div>
       </div>
+
     </section>
-
-    <!-- Return Home Button -->
-    <a href="../index.html" class="home-button">🏠 Return Home</a>
-
   </main>
 </body>
 </html>

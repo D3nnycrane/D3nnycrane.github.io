@@ -27,6 +27,20 @@
     header a { color: white; text-decoration: none; font-weight: 500; }
     header a:hover { text-decoration: underline; color: #d0e8ff; }
 
+    .return-home-btn {
+      display: inline-block;
+      background-color: #007acc;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+    .return-home-btn:hover {
+      background-color: #005ea0;
+    }
+
     nav.jump-nav {
       background: #fff;
       border-bottom: 2px solid #007acc22;
@@ -39,7 +53,7 @@
       z-index: 10;
     }
 
-    nav.jump-nav a { text-decoration: none; color: #007acc; font-weight: 600; }
+    nav.jump-nav a { text-decoration: none; color: #007acc; font-weight: 600; font-size: 0.95rem; }
     nav.jump-nav a:hover { text-decoration: underline; }
 
     main {
@@ -78,25 +92,10 @@
       overflow-x: auto;
     }
 
-    /* Return Home Button */
-    .home-button {
-      display: inline-block;
-      background-color: #007acc;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
-      font-family: 'Roboto', sans-serif;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-      transition: background 0.3s, box-shadow 0.3s;
-      margin-top: 2rem;
-    }
+    a { color: #007acc; }
+    a:hover { text-decoration: underline; }
 
-    .home-button:hover {
-      background-color: #005ea0;
-      box-shadow: 3px 3px 8px rgba(0,0,0,0.35);
-    }
+    @media print { nav.jump-nav { display: none !important; } }
   </style>
 </head>
 
@@ -106,6 +105,7 @@
     <p>
       <a href="owasp-top-10.html">← Back to OWASP Top 10</a>
     </p>
+    <a href="../index.html" class="return-home-btn">🏠 Return Home</a>
   </header>
 
   <nav class="jump-nav">
@@ -118,7 +118,7 @@
     <section id="overview">
       <h2>Overview</h2>
       <p>
-        Broken Access Control occurs when users can act outside of their intended permissions...
+        Broken Access Control occurs when users can act outside of their intended permissions. Attackers can gain unauthorized access to sensitive data, functions, or administrative actions.
       </p>
     </section>
 
@@ -131,7 +131,7 @@ GET /admin/delete-user?id=123 HTTP/1.1
 Host: vulnerable-app.local
 Cookie: session=attacker-session
       </pre>
-      <p>In this example, attackers can perform admin actions...</p>
+      <p>In this example, a user without admin privileges can delete other users by modifying the URL.</p>
     </section>
 
     <section id="fix">
@@ -143,10 +143,6 @@ Cookie: session=attacker-session
         <li>Use frameworks with built-in access control wherever possible.</li>
       </ul>
     </section>
-
-    <!-- Return Home Button -->
-    <a href="../index.html" class="home-button">🏠 Return Home</a>
-
   </main>
 </body>
 </html>
