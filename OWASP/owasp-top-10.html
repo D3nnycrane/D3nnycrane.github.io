@@ -60,7 +60,12 @@
       width: 100%;
     }
 
-    h2 { border-bottom: 2px solid #007acc; padding-bottom: 0.3rem; color: #007acc; text-align: center; }
+    h2 { 
+      border-bottom: 2px solid #007acc; 
+      padding-bottom: 0.3rem; 
+      color: #007acc; 
+      text-align: center; 
+    }
 
     /* Tiles for OWASP */
     .owasp-grid {
@@ -99,6 +104,26 @@
       background-color: #005ea0;
     }
 
+    /* Return Home Button */
+    .home-button {
+      display: inline-block;
+      background-color: #007acc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      transition: background 0.3s, box-shadow 0.3s;
+      margin-top: 2rem;
+    }
+
+    .home-button:hover {
+      background-color: #005ea0;
+      box-shadow: 3px 3px 8px rgba(0,0,0,0.35);
+    }
+
     @media print { nav.jump-nav { display: none !important; } }
   </style>
 </head>
@@ -107,7 +132,7 @@
   <header>
     <h1>OWASP Top 10 2025 - Mark J. Haakma</h1>
     <p>
-      <a href="index.html">← Back to Resume</a>
+      <a href="../index.html">← Back to Resume</a>
     </p>
   </header>
 
@@ -128,50 +153,54 @@
         <div class="owasp-card">
           <h3>A02: Cryptographic Failures</h3>
           <p>Issues with encryption, key management, and secure data storage.</p>
-          <a href="owasp/A02-cryptographic-failures.html" target="_blank">Read More</a>
+          <a href="A02-cryptographic-failures.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A03: Injection</h3>
           <p>SQL, NoSQL, OS, and LDAP injection vulnerabilities.</p>
-          <a href="owasp/A03-injection.html" target="_blank">Read More</a>
+          <a href="A03-injection.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A04: Insecure Design</h3>
           <p>Flaws in design and architecture causing security risks.</p>
-          <a href="owasp/A04-insecure-design.html" target="_blank">Read More</a>
+          <a href="A04-insecure-design.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A05: Security Misconfiguration</h3>
           <p>Improper configuration of servers, frameworks, and APIs.</p>
-          <a href="owasp/A05-security-misconfiguration.html" target="_blank">Read More</a>
+          <a href="A05-security-misconfiguration.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A06: Vulnerable & Outdated Components</h3>
           <p>Use of outdated or vulnerable libraries and components.</p>
-          <a href="owasp/A06-vulnerable-components.html" target="_blank">Read More</a>
+          <a href="A06-vulnerable-components.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A07: Identification & Authentication Failures</h3>
           <p>Weak authentication mechanisms and session management issues.</p>
-          <a href="owasp/A07-id-auth-failures.html" target="_blank">Read More</a>
+          <a href="A07-id-auth-failures.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A08: Software & Data Integrity Failures</h3>
           <p>Issues with code and data integrity verification.</p>
-          <a href="owasp/A08-software-data-integrity.html" target="_blank">Read More</a>
+          <a href="A08-software-data-integrity.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A09: Security Logging & Monitoring Failures</h3>
           <p>Lack of proper logging and monitoring can hide breaches.</p>
-          <a href="owasp/A09-logging-monitoring.html" target="_blank">Read More</a>
+          <a href="A09-logging-monitoring.html" target="_blank">Read More</a>
         </div>
         <div class="owasp-card">
           <h3>A10: Server-Side Request Forgery (SSRF)</h3>
           <p>Server accepts and acts upon unvalidated user-supplied URLs.</p>
-          <a href="owasp/A10-ssrf.html" target="_blank">Read More</a>
+          <a href="A10-ssrf.html" target="_blank">Read More</a>
         </div>
       </div>
     </section>
+
+    <!-- Return Home Button -->
+    <a href="../index.html" class="home-button">🏠 Return Home</a>
+
   </main>
 </body>
 </html>
