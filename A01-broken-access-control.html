@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A01: Broken Access Control - Mark J. Haakma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* General Body */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      background: #007acc;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 { margin-bottom: 0.2rem; }
+    header a { color: white; text-decoration: none; font-weight: 500; }
+    header a:hover { text-decoration: underline; color: #d0e8ff; }
+
+    /* Sticky nav */
+    nav.jump-nav {
+      background: #fff;
+      border-bottom: 2px solid #007acc22;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav.jump-nav a { text-decoration: none; color: #007acc; font-weight: 600; font-size: 0.95rem; }
+    nav.jump-nav a:hover { text-decoration: underline; }
+
+    /* Layout */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    h2 {
+      border-bottom: 2px solid #007acc;
+      padding-bottom: 0.3rem;
+      color: #007acc;
+      text-align: center;
+    }
+
+    h3 { color: #007acc; margin-top: 1rem; }
+    p, ul { line-height: 1.6; }
+
+    ul { padding-left: 1.5rem; }
+
+    /* Code blocks */
+    pre {
+      background: #e0e6eb;
+      padding: 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    /* Links */
+    a { color: #007acc; }
+    a:hover { text-decoration: underline; }
+
+    @media print { nav.jump-nav { display: none !important; } }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>A01: Broken Access Control</h1>
+    <p>
+      <a href="owasp-top-10.html">← Back to OWASP Top 10</a>
+    </p>
+  </header>
+
+  <nav class="jump-nav">
+    <a href="#overview">Overview</a>
+    <a href="#example">Example Exploit</a>
+    <a href="#fix">Proper Fix</a>
+  </nav>
+
+  <main>
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        Broken Access Control occurs when users can act outside of their intended permissions. Attackers can gain unauthorized access to sensitive data, functions, or administrative actions.
+      </p>
+    </section>
+
+    <section id="example">
+      <h2>Example Exploit</h2>
+      <p>Below is an example demonstrating a common access control issue:</p>
+      <pre>
+// Example: URL manipulation allows unauthorized access
+GET /admin/delete-user?id=123 HTTP/1.1
+Host: vulnerable-app.local
+Cookie: session=attacker-session
+      </pre>
+      <p>In this example, a user without admin privileges can delete other users by modifying the URL.</p>
+    </section>
+
+    <section id="fix">
+      <h2>Proper Fix</h2>
+      <ul>
+        <li>Enforce server-side authorization checks for every action.</li>
+        <li>Implement a deny-by-default access policy.</li>
+        <li>Audit and log access control failures.</li>
+        <li>Use frameworks with built-in access control wherever possible.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
