@@ -16,29 +16,123 @@
       scroll-behavior: smooth;
     }
 
-    header {
-      background: #007acc;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
+    .cyber-header {
+    background: linear-gradient(135deg, #0a0f1f 0%, #00152d 40%, #002b55 100%);
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: #4ecbff;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid #29bfff50;
+    box-shadow: 0 0 25px #009dff55;
+  }
+
+  /* Moving holographic scanline */
+  .cyber-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 170, 255, 0.05) 50%,
+      transparent 100%
+    );
+    animation: holoSweep 6s infinite linear;
+  }
+
+  /* Futuristic flicker shimmer */
+  .cyber-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, #007acc33 0%, transparent 70%);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  @keyframes holoSweep {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(50%); }
+  }
+
+  /* TITLE */
+  .cyber-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    color: #4ecbff;
+    margin-bottom: 1rem;
+    text-shadow:
+      0 0 6px #29bfff,
+      0 0 12px #009dff,
+      0 0 30px #007acc;
+    animation: titleGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% {
+      text-shadow:
+        0 0 6px #29bfff,
+        0 0 12px #009dff,
+        0 0 30px #007acc;
     }
+    50% {
+      text-shadow:
+        0 0 12px #4ecbff,
+        0 0 24px #00b7ff,
+        0 0 40px #00c8ff;
+    }
+  }
 
     header h1 { margin-bottom: 0.2rem; }
     header a { color: white; text-decoration: none; font-weight: 500; }
     header a:hover { text-decoration: underline; color: #d0e8ff; }
 
-    .return-home-btn {
+    .home-button-cyber {
       display: inline-block;
-      background-color: #007acc;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 6px;
+      padding: 10px 22px;
+      background: #0a0f1f; /* dark base for contrast */
+      border-radius: 12px;
+      color: #4ecbff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       text-decoration: none;
-      font-weight: 500;
-      margin-top: 1rem;
+      position: relative;
+
+      /* 3D neon look */
+      box-shadow:
+          0 0 6px #007acc,
+          0 0 12px #29bfff,
+          inset 0 0 6px #003e66;
+
+      border: 1px solid #29bfff;
+
+      transition: all 0.25s ease;
     }
-    .return-home-btn:hover {
-      background-color: #005ea0;
+
+    /* Subtle neon pulse on hover */
+    .home-button-cyber:hover {
+      color: white;
+      transform: translateY(-2px) scale(1.03);
+
+      /* stronger glow on hover */
+      box-shadow:
+          0 0 10px #39c2ff,
+          0 0 25px #00aaff,
+          0 0 40px #0099ff,
+          inset 0 0 6px #007acc;
+    }
+
+    /* Active click press */
+    .home-button-cyber:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow:
+          0 0 6px #39c2ff,
+          inset 0 0 10px #004f7a;
     }
 
     nav.jump-nav {
@@ -100,12 +194,12 @@
 </head>
 
 <body>
-  <header>
-    <h1>A01: Broken Access Control</h1>
+  <header class="cyber-header">
+    <h1 class="cyber-title">A01: Broken Access Control</h1>
     <p>
       <a href="owasp-top-10.html">← Back to OWASP Top 10</a>
     </p>
-    <a href="../index.html" class="return-home-btn">🏠 Return Home</a>
+    <a class="home-button-cyber" href="../index.html">Return Home</a>
   </header>
 
   <nav class="jump-nav">
