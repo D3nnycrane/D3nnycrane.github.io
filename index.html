@@ -18,7 +18,7 @@
   /* HEADER */
   .cyber-header {
     background: linear-gradient(135deg, #0a0f1f 0%, #00152d 40%, #002b55 100%);
-    padding: 2.5rem 1rem;
+    padding: 2.5rem 1rem 3.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -31,7 +31,7 @@
     font-weight: 800;
     letter-spacing: 1.2px;
     color: #4ecbff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
     text-shadow: 0 0 4px #29bfff, 0 0 8px #009dff, 0 0 15px #007acc;
     animation: titleGlow 4s ease-in-out infinite;
   }
@@ -41,13 +41,31 @@
     50% { text-shadow: 0 0 8px #4ecbff, 0 0 16px #00b7ff, 0 0 25px #00c8ff; }
   }
 
+  /* ROTATING SUBTITLE */
+  .rotating-subtitle {
+    font-size: 1.1rem;
+    color: #89d6ff;
+    margin-bottom: 1rem;
+    height: 1.4rem;
+    text-shadow: 0 0 4px #29bfff;
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   /* CONTACT LINKS */
-  .cyber-header .contact a {
+  .cyber-header .contact a,
+  nav.jump-nav a {
     color: #4ecbff;
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
   }
-  .cyber-header .contact a:hover {
+
+  .cyber-header .contact a:hover,
+  nav.jump-nav a:hover {
     color: #ffffff;
     text-shadow: 0 0 3px #4ecbff, 0 0 6px #29bfff, 0 0 10px #007acc, 0 0 15px #00c8ff;
     animation: linkGlow 1.5s ease-in-out infinite alternate;
@@ -58,6 +76,25 @@
     50% { text-shadow: 0 0 6px #4ecbff, 0 0 12px #29bfff, 0 0 18px #007acc, 0 0 25px #00c8ff; }
   }
 
+  /* RESUME BUTTON */
+  .resume-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background: #007acc;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #007accaa;
+    transition: 0.3s ease;
+  }
+  .resume-button:hover {
+    background: #00aaff;
+    box-shadow: 0 0 15px #00c8ff;
+  }
+
+  /* NAV */
   nav.jump-nav {
     background: #0f1424;
     border-bottom: 2px solid #007acc22;
@@ -69,13 +106,11 @@
     top: 0;
     z-index: 10;
   }
+
   nav.jump-nav a {
-    text-decoration: none;
-    color: #4ecbff;
     font-weight: 600;
     font-size: 0.95rem;
   }
-  nav.jump-nav a:hover { text-decoration: underline; }
 
   main {
     display: flex;
@@ -89,7 +124,7 @@
   section {
     background-color: #111827;
     border-radius: 12px;
-    box-shadow: 0 0 6px #007acc33; /* 50% less intense glow */
+    box-shadow: 0 0 6px #007acc33;
     padding: 1.5rem;
     margin-bottom: 2rem;
     width: 100%;
@@ -102,7 +137,7 @@
     border-bottom: 2px solid #29bfff;
     padding-bottom: 0.3rem;
     color: #4ecbff;
-    text-shadow: 0 0 2px #29bfff; /* subtle title glow */
+    text-shadow: 0 0 2px #29bfff;
   }
 
   .section-glow {
@@ -130,6 +165,7 @@
     margin-bottom:4px;
     display:block;
   }
+
   .skill-bar-wrapper {
     position: relative;
     background: #222a40;
@@ -137,14 +173,14 @@
     height: 12px;
     overflow: hidden;
   }
+
   .skill-bar {
     height: 100%;
     width: 0;
     background: linear-gradient(270deg, #007acc, #37a1ff, #00e0ff, #007acc);
     background-size: 600% 100%;
     border-radius: 20px;
-    box-shadow: 0 0 3px #29bfff; /* slightly less intense glow */
-    position: relative;
+    box-shadow: 0 0 3px #29bfff;
     animation: neonFlow 3s linear infinite;
   }
 
@@ -162,21 +198,30 @@
     margin: 1rem auto;
     max-width: 700px;
     text-align: left;
-    box-shadow: 0 0 4px #29bfff; /* subtle */
+    box-shadow: 0 0 4px #29bfff;
     transition: all 0.2s ease;
   }
-  #projects .project-card:hover { box-shadow: 0 0 12px #00c8ff; transform: translateY(-3px); }
+  #projects .project-card:hover {
+    box-shadow: 0 0 12px #00c8ff;
+    transform: translateY(-3px);
+  }
 </style>
 </head>
 <body>
 
 <header class="cyber-header">
   <h1 class="cyber-title">Mark J. Haakma</h1>
+
+  <!-- Restored Rotating Subtitle -->
+  <div id="rotatingSubtitle" class="rotating-subtitle">Cybersecurity Analyst</div>
+
   <p class="contact">
     📧 <a href="mailto:mjhaakma@gmail.com">Email</a> |
     🌐 <a href="https://www.linkedin.com/in/mark-haakma-b286a6153" target="_blank">LinkedIn</a> |
     💻 <a href="https://github.com/D3nnycrane" target="_blank">GitHub</a>
   </p>
+
+  <a class="resume-button" href="Mark-Haakma-Resume.pdf" download>Download Resume</a>
 </header>
 
 <nav class="jump-nav">
@@ -219,13 +264,34 @@
 </main>
 
 <script>
-  // Section glow wave
-  const sections = document.querySelectorAll("main section");
-  sections.forEach((sec, idx) => { setTimeout(() => sec.classList.add("section-glow"), idx*700); });
+  /* Rotating Subtitle */
+  const subtitles = [
+    "Cybersecurity Analyst",
+    "Security Engineer in Progress",
+    "AI-Assisted Defense Enthusiast",
+    "Home Lab Builder",
+    "Threat Detection & Automation"
+  ];
 
-  // Skill bars progressive fill
-  const skillBars = document.querySelectorAll(".skill-bar");
-  skillBars.forEach((bar, idx) => {
+  let idx = 0;
+  const subtitleEl = document.getElementById("rotatingSubtitle");
+
+  setInterval(() => {
+    idx = (idx + 1) % subtitles.length;
+    subtitleEl.style.opacity = 0;
+    setTimeout(() => {
+      subtitleEl.textContent = subtitles[idx];
+      subtitleEl.style.opacity = 1;
+    }, 300);
+  }, 2600);
+
+  /* Section glow */
+  document.querySelectorAll("main section").forEach((sec, idx) => {
+    setTimeout(() => sec.classList.add("section-glow"), idx * 700);
+  });
+
+  /* Skill bars */
+  document.querySelectorAll(".skill-bar").forEach((bar, idx) => {
     setTimeout(()=>{
       bar.style.transition="width 1.5s ease-in-out";
       bar.style.width = bar.dataset.skill+"%";
