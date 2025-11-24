@@ -1,231 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A01: Broken Access Control - Mark J. Haakma</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A01: Broken Access Control - Mark J. Haakma</title>
 
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f6f8;
-      color: #333;
-      scroll-behavior: smooth;
-    }
+<!-- Fonts: Orbitron for headers/nav, Roboto for body -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
 
-    .cyber-header {
-      background: linear-gradient(135deg, #0a0f1f 0%, #00152d 40%, #002b55 100%);
-      padding: 2.5rem 1rem;
-      text-align: center;
-      color: #4ecbff;
+<style>
+  body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a0f1f;
+    color: #f0f8ff;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* ---------------- HEADER ---------------- */
+  .cyber-header {
+    background: linear-gradient(135deg, #0a0f1f 0%, #00152d 40%, #002b55 100%);
+    padding: 2.5rem 1rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid #29bfff50;
+    box-shadow: 0 0 25px #009dff40;
+  }
+
+  .header-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .cyber-title {
+    position: relative;
+    z-index: 2;
+    font-family: "Orbitron", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #4ecbff;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 0 4px #29bfff, 0 0 8px #009dff, 0 0 15px #007acc;
+    animation: titleGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 4px #29bfff, 0 0 8px #009dff, 0 0 15px #007acc; }
+    50% { text-shadow: 0 0 8px #4ecbff, 0 0 16px #00b7ff, 0 0 25px #00c8ff; }
+  }
+
+  /* ---------------- BUTTON ---------------- */
+  .cyber-header a.home-button-cyber {
       position: relative;
-      overflow: hidden;
-      border-bottom: 2px solid #29bfff50;
-      box-shadow: 0 0 25px #009dff55;
-    }
-
-    /* Holographic scanline */
-    .cyber-header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(0, 170, 255, 0.05) 50%,
-        transparent 100%
-      );
-      animation: holoSweep 6s infinite linear;
-      pointer-events: none; /* <- Fix link click */
-    }
-
-    /* Futuristic shimmer */
-    .cyber-header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, #007acc33 0%, transparent 70%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    @keyframes holoSweep {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(50%); }
-    }
-
-    .cyber-title {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      color: #4ecbff;
-      margin-bottom: 1rem;
-      text-shadow:
-        0 0 6px #29bfff,
-        0 0 12px #009dff,
-        0 0 30px #007acc;
-      animation: titleGlow 4s ease-in-out infinite;
-    }
-
-    @keyframes titleGlow {
-      0%, 100% {
-        text-shadow:
-          0 0 6px #29bfff,
-          0 0 12px #009dff,
-          0 0 30px #007acc;
-      }
-      50% {
-        text-shadow:
-          0 0 12px #4ecbff,
-          0 0 24px #00b7ff,
-          0 0 40px #00c8ff;
-      }
-    }
-
-    header h1 { margin-bottom: 0.2rem; }
-    
-    /* Cyberpunk link glow */
-    header a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    header a:hover {
-      text-decoration: underline;
-      color: #4ecbff;
-      text-shadow:
-        0 0 6px #29bfff,
-        0 0 12px #00aaff,
-        0 0 20px #007acc;
-    }
-
-    .home-button-cyber {
+      z-index: 2;
       display: inline-block;
-      padding: 10px 22px;
-      background: #0a0f1f;
-      border-radius: 12px;
-      color: #4ecbff;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: #007acc;
+      color: white !important;
+      font-weight: bold;
       text-decoration: none;
-      position: relative;
-      box-shadow:
-          0 0 6px #007acc,
-          0 0 12px #29bfff,
-          inset 0 0 6px #003e66;
-      border: 1px solid #29bfff;
+      border-radius: 6px;
+      font-family: "Orbitron", sans-serif;
+      box-shadow: 0 0 8px #007accaa;
+      border: none;
       transition: all 0.25s ease;
-    }
-    .home-button-cyber:hover {
-      color: white;
-      transform: translateY(-2px) scale(1.03);
-      box-shadow:
-          0 0 10px #39c2ff,
-          0 0 25px #00aaff,
-          0 0 40px #0099ff,
-          inset 0 0 6px #007acc;
-    }
-    .home-button-cyber:active {
-      transform: translateY(1px) scale(0.98);
-      box-shadow: 0 0 6px #39c2ff, inset 0 0 10px #004f7a;
-    }
+      text-align: center;
+  }
 
-    nav.jump-nav {
-      background: #fff;
-      border-bottom: 2px solid #007acc22;
-      padding: 0.5rem 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    nav.jump-nav a { text-decoration: none; color: #007acc; font-weight: 600; font-size: 0.95rem; }
-    nav.jump-nav a:hover { text-decoration: underline; }
+  .cyber-header a.home-button-cyber:hover {
+      background: #00aaff;
+      color: white !important;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 0 12px #39c2ff, 0 0 28px #00aaff, 0 0 45px #0099ff, inset 0 0 6px #007acc;
+  }
 
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+  nav.jump-nav {
+    background: #0f1424;
+    border-bottom: 2px solid #007acc22;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
 
-    section {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      width: 100%;
-    }
+  nav.jump-nav a {
+    color: #4ecbff;
+    text-decoration: none;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
 
-    h2 { border-bottom: 2px solid #007acc; padding-bottom: 0.3rem; color: #007acc; text-align: center; }
-    h3 { color: #007acc; margin-top: 1rem; }
-    p, ul { line-height: 1.6; }
-    ul { padding-left: 1.5rem; }
-    pre { background: #e0e6eb; padding: 10px; border-radius: 6px; overflow-x: auto; }
+  nav.jump-nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff;
+  }
 
-    a { color: #007acc; transition: all 0.3s ease; }
-    a:hover { text-decoration: underline; text-shadow: 0 0 6px #29bfff, 0 0 12px #00aaff, 0 0 20px #007acc; }
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-    @media print { nav.jump-nav { display: none !important; } }
-  </style>
+  section {
+    background-color: #111827;
+    border-radius: 12px;
+    box-shadow: 0 0 6px #007acc33;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: left;
+    opacity: 0.97;
+    transition: box-shadow 0.3s ease;
+  }
+
+  section h2 {
+    border-bottom: 2px solid #29bfff;
+    padding-bottom: 0.3rem;
+    color: #4ecbff;
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-shadow: 0 0 3px #29bfff;
+  }
+
+  .section-glow {
+    animation: neonFlicker 3s infinite alternate;
+  }
+
+  @keyframes neonFlicker {
+    0%, 100% { box-shadow: 0 0 3px #29bfff, 0 0 6px #00aaff, 0 0 10px #007acc; }
+    50% { box-shadow: 0 0 6px #4ecbff, 0 0 12px #00b7ff, 0 0 18px #00c8ff; }
+  }
+
+  pre {
+    background: #1a1f3a;
+    color: #f0f8ff;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: monospace;
+  }
+</style>
 </head>
 
 <body>
-  <header class="cyber-header">
-    <h1 class="cyber-title">A01: Broken Access Control</h1>
-    <p>
-      <a href="owasp-top-10.html">← Back to OWASP Top 10</a>
-    </p>
-    <a class="home-button-cyber" href="../index.html">Return Home</a>
-  </header>
+<header class="cyber-header">
+  <canvas class="header-rain"></canvas>
+  <h1 class="cyber-title">A01: Broken Access Control</h1>
+  <a class="home-button-cyber" href="../index.html">Return Home</a>
+</header>
 
-  <nav class="jump-nav">
-    <a href="#overview">Overview</a>
-    <a href="#example">Example Exploit</a>
-    <a href="#fix">Proper Fix</a>
-  </nav>
+<nav class="jump-nav">
+  <a href="#overview">Overview</a>
+  <a href="#example">Example Exploit</a>
+  <a href="#fix">Proper Fix</a>
+</nav>
 
-  <main>
-    <section id="overview">
-      <h2>Overview</h2>
-      <p>
-        Broken Access Control occurs when users can act outside of their intended permissions. Attackers can gain unauthorized access to sensitive data, functions, or administrative actions.
-      </p>
-    </section>
+<main>
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>Broken Access Control occurs when users can act outside of their intended permissions. Attackers can gain unauthorized access to sensitive data, functions, or administrative actions.</p>
+  </section>
 
-    <section id="example">
-      <h2>Example Exploit</h2>
-      <p>Below is an example demonstrating a common access control issue:</p>
-      <pre>
+  <section id="example">
+    <h2>Example Exploit</h2>
+    <p>Below is an example demonstrating a common access control issue:</p>
+    <pre>
 // Example: URL manipulation allows unauthorized access
 GET /admin/delete-user?id=123 HTTP/1.1
 Host: vulnerable-app.local
 Cookie: session=attacker-session
-      </pre>
-      <p>In this example, a user without admin privileges can delete other users by modifying the URL.</p>
-    </section>
+    </pre>
+  </section>
 
-    <section id="fix">
-      <h2>Proper Fix</h2>
-      <ul>
-        <li>Enforce server-side authorization checks for every action.</li>
-        <li>Implement a deny-by-default access policy.</li>
-        <li>Audit and log access control failures.</li>
-        <li>Use frameworks with built-in access control wherever possible.</li>
-      </ul>
-    </section>
-  </main>
+  <section id="fix">
+    <h2>Proper Fix</h2>
+    <ul>
+      <li>Enforce server-side authorization checks for every action.</li>
+      <li>Implement a deny-by-default access policy.</li>
+      <li>Audit and log access control failures.</li>
+      <li>Use frameworks with built-in access control wherever possible.</li>
+    </ul>
+  </section>
+</main>
+
+<!-- DIGITAL RAIN SCRIPT -->
+<script>
+const canvas = document.querySelector('.header-rain');
+const ctx = canvas.getContext('2d');
+
+function sizeCanvas() {
+  const header = document.querySelector('.cyber-header');
+  canvas.width = header.offsetWidth;
+  canvas.height = header.offsetHeight;
+}
+sizeCanvas();
+window.addEventListener('resize', sizeCanvas);
+
+const chars = "アカサタナハマヤラワ0123456789";
+const letters = chars.split("");
+const fontSize = 14;
+let columns;
+let drops;
+
+function setup() {
+  columns = Math.floor(canvas.width / fontSize);
+  drops = new Array(columns).fill(1);
+}
+setup();
+
+function draw() {
+  ctx.fillStyle = "rgba(2, 15, 30, 0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#29bfff";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+setInterval(draw, 45);
+
+document.querySelectorAll("main section").forEach((sec, idx) => {
+  setTimeout(() => sec.classList.add("section-glow"), idx * 700);
+});
+</script>
+
 </body>
 </html>

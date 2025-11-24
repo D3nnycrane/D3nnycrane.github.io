@@ -4,7 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mark J. Haakma - Resume</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
+
 <style>
   body {
     font-family: "Roboto", sans-serif;
@@ -13,9 +17,10 @@
     background-color: #0a0f1f;
     color: #f0f8ff;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
-  /* HEADER */
+  /* ---------------- HEADER ---------------- */
   .cyber-header {
     background: linear-gradient(135deg, #0a0f1f 0%, #00152d 40%, #002b55 100%);
     padding: 2.5rem 1rem 3.5rem;
@@ -26,10 +31,26 @@
     box-shadow: 0 0 25px #009dff40;
   }
 
+  /* DIGITAL RAIN CANVAS */
+  .header-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+
   .cyber-title {
-    font-size: 2rem;
+    position: relative;
+    z-index: 2;
+    font-family: "Orbitron", sans-serif;
+    font-size: 2.2rem;
     font-weight: 800;
-    letter-spacing: 1.2px;
+    letter-spacing: 2px;
     color: #4ecbff;
     margin-bottom: 0.3rem;
     text-shadow: 0 0 4px #29bfff, 0 0 8px #009dff, 0 0 15px #007acc;
@@ -41,60 +62,69 @@
     50% { text-shadow: 0 0 8px #4ecbff, 0 0 16px #00b7ff, 0 0 25px #00c8ff; }
   }
 
-  /* ROTATING SUBTITLE */
   .rotating-subtitle {
+    position: relative;
+    z-index: 2;
     font-size: 1.1rem;
     color: #89d6ff;
     margin-bottom: 1rem;
     height: 1.4rem;
-    text-shadow: 0 0 4px #29bfff;
-    animation: fadeIn 0.8s ease;
+    opacity: 1;
+    transition: opacity 0.5s ease;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* CONTACT LINKS */
+  /* CONTACT + NAV LINK GLOW STYLE */
   .cyber-header .contact a,
-  nav.jump-nav a {
+  nav.jump-nav a,
+  .project-card a,
+  .resume-button {
     color: #4ecbff;
     text-decoration: none;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
     transition: color 0.3s ease, text-shadow 0.3s ease;
   }
 
   .cyber-header .contact a:hover,
-  nav.jump-nav a:hover {
+  nav.jump-nav a:hover,
+  .project-card a:hover,
+  .resume-button:hover {
     color: #ffffff;
-    text-shadow: 0 0 3px #4ecbff, 0 0 6px #29bfff, 0 0 10px #007acc, 0 0 15px #00c8ff;
+    text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff;
     animation: linkGlow 1.5s ease-in-out infinite alternate;
   }
 
   @keyframes linkGlow {
-    0%,100% { text-shadow: 0 0 3px #4ecbff, 0 0 6px #29bfff, 0 0 10px #007acc, 0 0 15px #00c8ff; }
-    50% { text-shadow: 0 0 6px #4ecbff, 0 0 12px #29bfff, 0 0 18px #007acc, 0 0 25px #00c8ff; }
+    0%,100% { text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff; }
+    50% { text-shadow: 0 0 6px #4ecbff, 0 0 14px #29bfff, 0 0 22px #00c8ff; }
   }
 
-  /* RESUME BUTTON */
+  /* Resume button matching OWASP style */
   .resume-button {
+    position: relative;
+    z-index: 2;
     display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem 1.2rem; /* match OWASP */
+    text-align: center;
     background: #007acc;
     color: white;
     font-weight: bold;
     text-decoration: none;
     border-radius: 6px;
     box-shadow: 0 0 8px #007accaa;
-    transition: 0.3s ease;
-  }
-  .resume-button:hover {
-    background: #00aaff;
-    box-shadow: 0 0 15px #00c8ff;
+    font-family: "Orbitron", sans-serif;
+    transition: all 0.25s ease;
   }
 
-  /* NAV */
+  .resume-button:hover {
+    background: #00aaff;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 12px #39c2ff, 0 0 28px #00aaff, 0 0 45px #0099ff, inset 0 0 6px #007acc;
+    color: white;
+  }
+
+
+  /* NAVIGATION */
   nav.jump-nav {
     background: #0f1424;
     border-bottom: 2px solid #007acc22;
@@ -105,11 +135,6 @@
     position: sticky;
     top: 0;
     z-index: 10;
-  }
-
-  nav.jump-nav a {
-    font-weight: 600;
-    font-size: 0.95rem;
   }
 
   main {
@@ -137,16 +162,8 @@
     border-bottom: 2px solid #29bfff;
     padding-bottom: 0.3rem;
     color: #4ecbff;
-    text-shadow: 0 0 2px #29bfff;
-  }
-
-  .section-glow {
-    animation: neonFlicker 3s infinite alternate;
-  }
-
-  @keyframes neonFlicker {
-    0%, 100% { box-shadow: 0 0 3px #29bfff, 0 0 6px #00aaff, 0 0 10px #007acc; }
-    50% { box-shadow: 0 0 6px #4ecbff, 0 0 12px #00b7ff, 0 0 18px #00c8ff; }
+    font-family: "Orbitron", sans-serif;
+    text-shadow: 0 0 3px #29bfff;
   }
 
   /* SKILLS */
@@ -158,12 +175,14 @@
   }
 
   .skill-item { text-align: left; }
+
   .skill-label {
     font-weight: 700;
     color: #37a1ff;
     text-shadow: 0 0 2px #29bfff;
-    margin-bottom:4px;
-    display:block;
+    margin-bottom: 4px;
+    display: block;
+    font-family: "Orbitron", sans-serif;
   }
 
   .skill-bar-wrapper {
@@ -181,7 +200,7 @@
     background-size: 600% 100%;
     border-radius: 20px;
     box-shadow: 0 0 3px #29bfff;
-    animation: neonFlow 3s linear infinite;
+    animation: neonFlow 4.5s linear infinite;
   }
 
   @keyframes neonFlow {
@@ -205,14 +224,15 @@
     box-shadow: 0 0 12px #00c8ff;
     transform: translateY(-3px);
   }
+
 </style>
 </head>
 <body>
 
 <header class="cyber-header">
-  <h1 class="cyber-title">Mark J. Haakma</h1>
+  <canvas class="header-rain"></canvas>
 
-  <!-- Restored Rotating Subtitle -->
+  <h1 class="cyber-title">Mark J. Haakma</h1>
   <div id="rotatingSubtitle" class="rotating-subtitle">Cybersecurity Analyst</div>
 
   <p class="contact">
@@ -234,7 +254,9 @@
 </nav>
 
 <main>
-  <section id="summary"><h2>Summary</h2><p>A cybersecurity compliance analyst with 7+ years experience, expanding into technical security engineering and AI-driven defense.</p></section>
+  <section id="summary"><h2>Summary</h2>
+    <p>A cybersecurity compliance analyst with 7+ years experience, expanding into technical security engineering and AI-driven defense.</p>
+  </section>
 
   <section id="skills"><h2>Skills & Tools</h2>
     <div class="skills-grid">
@@ -259,44 +281,101 @@
   <section id="projects"><h2>Projects</h2>
     <div class="project-card"><h3>Home Lab Setup Guide</h3><p>Building enterprise-grade home labs.</p></div>
     <div class="project-card"><h3>AI-Assisted Threat Detection</h3><p>Using ML models for anomaly detection.</p></div>
-    <div class="project-card"><h3>OWASP Top 10</h3><p>Demonstrations and guides for exploiting and understanding the OWASP Top 10 vulnerabilities.</p><a href="owasp/owasp-top-10.html" target="_blank">Read More</a></div>
+    <div class="project-card">
+      <h3>OWASP Top 10</h3>
+      <p>Demonstrations and guides for exploiting and understanding the OWASP Top 10 vulnerabilities.</p>
+      <a href="owasp/owasp-top-10.html" target="_blank">READ MORE</a>
+    </div>
   </section>
 </main>
 
+<!-- DIGITAL RAIN SCRIPT -->
 <script>
-  /* Rotating Subtitle */
-  const subtitles = [
-    "Cybersecurity Analyst",
-    "Security Engineer in Progress",
-    "AI-Assisted Defense Enthusiast",
-    "Home Lab Builder",
-    "Threat Detection & Automation"
-  ];
+const canvas = document.querySelector('.header-rain');
+const ctx = canvas.getContext('2d');
 
-  let idx = 0;
-  const subtitleEl = document.getElementById("rotatingSubtitle");
+function sizeCanvas() {
+  const header = document.querySelector('.cyber-header');
+  canvas.width = header.clientWidth;
+  canvas.height = header.clientHeight;
+}
 
-  setInterval(() => {
-    idx = (idx + 1) % subtitles.length;
-    subtitleEl.style.opacity = 0;
-    setTimeout(() => {
-      subtitleEl.textContent = subtitles[idx];
-      subtitleEl.style.opacity = 1;
-    }, 300);
-  }, 2600);
+sizeCanvas();
 
-  /* Section glow */
-  document.querySelectorAll("main section").forEach((sec, idx) => {
-    setTimeout(() => sec.classList.add("section-glow"), idx * 700);
-  });
+window.addEventListener('resize', () => {
+  sizeCanvas();
+  setup();
+});
 
-  /* Skill bars */
-  document.querySelectorAll(".skill-bar").forEach((bar, idx) => {
-    setTimeout(()=>{
-      bar.style.transition="width 1.5s ease-in-out";
-      bar.style.width = bar.dataset.skill+"%";
-    }, idx*500);
-  });
+const chars = "アカサタナハマヤラワ0123456789";
+const letters = chars.split("");
+const fontSize = 14;
+let columns;
+let drops;
+
+function setup() {
+  columns = Math.floor(canvas.width / fontSize);
+  drops = new Array(columns).fill(1);
+}
+
+setup();
+
+function draw() {
+  ctx.fillStyle = "rgba(2, 15, 30, 0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#29bfff";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+
+setInterval(draw, 45);
 </script>
+
+<!-- ROTATING SUBTITLE SCRIPT -->
+<script>
+const subtitles = [
+  "Cybersecurity Analyst",
+  "Security Engineer in Progress",
+  "AI-Assisted Defense Enthusiast",
+  "Home Lab Builder",
+  "Threat Detection & Automation"
+];
+
+let idx = 0;
+const subtitleEl = document.getElementById("rotatingSubtitle");
+
+setInterval(() => {
+  subtitleEl.style.opacity = 0;
+  setTimeout(() => {
+    idx = (idx + 1) % subtitles.length;
+    subtitleEl.textContent = subtitles[idx];
+    subtitleEl.style.opacity = 1;
+  }, 500);
+}, 2600);
+
+/* Section glow stagger */
+document.querySelectorAll("main section").forEach((sec, idx) => {
+  setTimeout(() => sec.classList.add("section-glow"), idx * 700);
+});
+
+/* Skill bar animation */
+document.querySelectorAll(".skill-bar").forEach((bar, idx) => {
+  setTimeout(()=>{
+    bar.style.transition="width 1.5s ease-in-out";
+    bar.style.width = bar.dataset.skill+"%";
+  }, idx*500);
+});
+</script>
+
 </body>
 </html>
