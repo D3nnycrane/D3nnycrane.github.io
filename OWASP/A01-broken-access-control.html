@@ -35,7 +35,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100vw;           /* covers full viewport width */
     height: 100%;
     z-index: 0;
     opacity: 0.35;
@@ -142,13 +142,16 @@
     text-shadow: 0 0 3px #29bfff;
   }
 
-  .section-glow {
-    animation: neonFlicker 3s infinite alternate;
+  /* section glow animation */
+  /* ⭐ Glow pulse reinstated */
+  @keyframes sectionPulse {
+    0%   { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+    50%  { box-shadow: 0 0 18px #4ecbffcc; transform: scale(1.015); }
+    100% { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
   }
 
-  @keyframes neonFlicker {
-    0%, 100% { box-shadow: 0 0 3px #29bfff, 0 0 6px #00aaff, 0 0 10px #007acc; }
-    50% { box-shadow: 0 0 6px #4ecbff, 0 0 12px #00b7ff, 0 0 18px #00c8ff; }
+  .section-glow {
+    animation: sectionPulse 2.2s ease-in-out forwards;
   }
 
   pre {
@@ -210,11 +213,15 @@ const ctx = canvas.getContext('2d');
 
 function sizeCanvas() {
   const header = document.querySelector('.cyber-header');
+  // use offsetWidth so canvas covers the full header area (including when viewport is wide)
   canvas.width = header.offsetWidth;
   canvas.height = header.offsetHeight;
 }
 sizeCanvas();
-window.addEventListener('resize', sizeCanvas);
+window.addEventListener('resize', () => {
+  sizeCanvas();
+  setup();
+});
 
 const chars = "アカサタナハマヤラワ0123456789";
 const letters = chars.split("");
@@ -223,7 +230,7 @@ let columns;
 let drops;
 
 function setup() {
-  columns = Math.floor(canvas.width / fontSize);
+  columns = Math.floor(canvas.width / fontSize) || 1;
   drops = new Array(columns).fill(1);
 }
 setup();
@@ -245,10 +252,29 @@ function draw() {
   }
 }
 setInterval(draw, 45);
+</script>
 
-document.querySelectorAll("main section").forEach((sec, idx) => {
-  setTimeout(() => sec.classList.add("section-glow"), idx * 700);
-});
+<!-- SECTION GLOW LOOP SCRIPT -->
+<script>
+const sections = document.querySelectorAll("main section");
+
+// Function to run the glow sequence once
+function runGlowSequence() {
+  sections.forEach((sec, idx) => {
+    setTimeout(() => {
+      sec.classList.remove("section-glow");
+      void sec.offsetWidth; // forces reflow so the animation can restart
+      sec.classList.add("section-glow");
+    }, idx * 700);
+  });
+}
+
+// Run immediately once
+runGlowSequence();
+
+// Then repeat forever every X ms
+const totalDuration = sections.length * 700 + 1000;
+setInterval(runGlowSequence, totalDuration);
 </script>
 
 </body>

@@ -115,6 +115,7 @@
     padding: 2rem 1rem;
   }
 
+  /* unified section style (with border/glow) */
   section {
     background-color: #111827;
     border-radius: 12px;
@@ -123,8 +124,8 @@
     opacity: 0.97;
     border: 2px solid #29bfff50;
     box-shadow: 0 0 12px #29bfff33;
-    transition: box-shadow 0.3s ease;
-}
+    transition: box-shadow 0.3s ease, transform 0.25s ease;
+  }
 
   section h2 {
     border-bottom: 2px solid #29bfff;
@@ -135,6 +136,17 @@
     font-weight: 800;
     text-shadow: 0 0 3px #29bfff;
     text-align: center;
+  }
+
+  /* Glow animation applied to the whole section when .section-glow is present */
+  @keyframes sectionPulse {
+    0%   { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+    50%  { box-shadow: 0 0 18px #4ecbffcc; transform: scale(1.005); }
+    100% { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+  }
+
+  .section-glow {
+    animation: sectionPulse 2.2s ease-in-out forwards;
   }
 
   .owasp-grid {
@@ -229,7 +241,7 @@
       <div class="owasp-card">
         <h3>A01: Broken Access Controls</h3>
         <p>Exploiting insecure authorization and access control mechanisms.</p>
-        <a href="A01-broken-access-control.html" target="_blank">Read More</a>
+        <a href="A01-broken-access-control.html">Read More</a>
       </div>
       <div class="owasp-card">
         <h3>A02: Cryptographic Failures</h3>
@@ -294,14 +306,17 @@ const fontSize = 14;
 let columns, drops;
 
 function sizeCanvas() {
+  // Use parentElement (header) size so canvas covers entire header area
   canvas.width = canvas.parentElement.offsetWidth;
   canvas.height = canvas.parentElement.offsetHeight;
-  columns = Math.floor(canvas.width / fontSize);
+  columns = Math.max(1, Math.floor(canvas.width / fontSize));
   drops = new Array(columns).fill(1);
 }
 sizeCanvas();
 
-window.addEventListener('resize', sizeCanvas);
+window.addEventListener('resize', () => {
+  sizeCanvas();
+});
 
 function draw() {
   ctx.fillStyle = "rgba(2, 15, 30, 0.08)";
@@ -322,6 +337,39 @@ function draw() {
 }
 
 setInterval(draw, 45);
+</script>
+
+<!-- GLOWING PULSE SCRIPT: cycles the MAIN section(s) continuously -->
+<script>
+(function () {
+  const sections = document.querySelectorAll("main > section");
+  if (!sections || sections.length === 0) return;
+
+  // Ensure the class exists visually (CSS above). We'll add/remove it in sequence.
+  function runGlowSequence() {
+    // Remove any existing glow quickly so re-adding retriggers animation
+    sections.forEach(sec => sec.classList.remove("section-glow"));
+
+    // Stagger adding the glow to each main section (works with 1 or more)
+    sections.forEach((sec, idx) => {
+      setTimeout(() => {
+        // trigger reflow to ensure animation restarts cleanly
+        void sec.offsetWidth;
+        sec.classList.add("section-glow");
+      }, idx * 700);
+    });
+  }
+
+  // Start immediately and then repeat forever
+  runGlowSequence();
+
+  // Calculate total duration: (stagger per section) + the length of the animation + small buffer
+  const stagger = 700;
+  const animationLength = 1600; // matches neonPulse duration in ms
+  const totalDuration = (sections.length - 1) * stagger + animationLength + 500;
+
+  setInterval(runGlowSequence, totalDuration);
+})();
 </script>
 
 </body>

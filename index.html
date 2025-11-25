@@ -104,7 +104,7 @@
     position: relative;
     z-index: 2;
     display: inline-block;
-    padding: 0.6rem 1.2rem; /* match OWASP */
+    padding: 0.6rem 1.2rem;
     text-align: center;
     background: #007acc;
     color: white;
@@ -122,7 +122,6 @@
     box-shadow: 0 0 12px #39c2ff, 0 0 28px #00aaff, 0 0 45px #0099ff, inset 0 0 6px #007acc;
     color: white;
   }
-
 
   /* NAVIGATION */
   nav.jump-nav {
@@ -154,12 +153,20 @@
     width: 100%;
     text-align: center;
     opacity: 0.97;
-
-    /* Unified glowing border */
     border: 2px solid #29bfff50;
     box-shadow: 0 0 12px #29bfff33;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
 
-    transition: box-shadow 0.3s ease;
+  /* ⭐ Glow pulse reinstated */
+  @keyframes sectionPulse {
+    0%   { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+    50%  { box-shadow: 0 0 18px #4ecbffcc; transform: scale(1.015); }
+    100% { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+  }
+
+  .section-glow {
+    animation: sectionPulse 2.2s ease-in-out forwards;
   }
 
   section h2 {
@@ -168,6 +175,13 @@
     color: #4ecbff;
     font-family: "Orbitron", sans-serif;
     text-shadow: 0 0 3px #29bfff;
+  }
+
+  .job-title {
+    font-family: "Orbitron", sans-serif; /* matches your headings */
+    color: #4ecbff; /* same color as other headings */
+    font-weight: 800; /* same as h2/h3 headings */
+    font-size: inherit; /* keeps it the same size as your <p> text */
   }
 
   /* SKILLS */
@@ -259,7 +273,8 @@
 
 <main>
   <section id="summary"><h2>Summary</h2>
-    <p>A cybersecurity compliance analyst with 7+ years experience, expanding into technical security engineering and AI-driven defense.</p>
+    <p>A cybersecurity compliance analyst with 7+ years industry experience, and decades of the hobby version. There's always more to learn, so don't stop.</p>
+    <p>If you're a recruiter, a colleague, or an interested learner - welcome! Grab my CV, review my fit for your role, or learn a little something in the Projects section.</p>
   </section>
 
   <section id="skills"><h2>Skills & Tools</h2>
@@ -274,7 +289,12 @@
   </section>
 
   <section id="experience"><h2>Experience</h2>
-    <p><strong>Security Operations Analyst — GRC Team</strong><br/><em>2018–Present</em></p>
+    <span class="job-title">Security Operations Analyst — GRC Team</span><br/>
+    <span class="job-title"><em>2018–Present</em></span>
+    <ul><li>Maintained compliance baselines using Tripwire Enterprise.</li></ul>
+    <ul><li>Maintained compliance baselines using Tripwire Enterprise.</li></ul>
+    <span class="job-title">Security Operations Analyst — GRC Team</span><br/>
+    <span class="job-title"><em>2018–Present</em></span>
     <ul><li>Maintained compliance baselines using Tripwire Enterprise.</li></ul>
   </section>
 
@@ -288,7 +308,7 @@
     <div class="project-card">
       <h3>OWASP Top 10</h3>
       <p>Demonstrations and guides for exploiting and understanding the OWASP Top 10 vulnerabilities.</p>
-      <a href="OWASP/owasp-top-10.html" target="_blank">READ MORE</a>
+      <a href="OWASP/owasp-top-10.html">READ MORE</a>
     </div>
   </section>
 </main>
@@ -367,10 +387,26 @@ setInterval(() => {
   }, 500);
 }, 2600);
 
-/* Section glow stagger */
-document.querySelectorAll("main section").forEach((sec, idx) => {
-  setTimeout(() => sec.classList.add("section-glow"), idx * 700);
-});
+/* ⭐ Section glow cascade ⭐ */
+const sections = document.querySelectorAll("main section");
+
+// Function to run the glow sequence once
+function runGlowSequence() {
+  sections.forEach((sec, idx) => {
+    setTimeout(() => {
+      sec.classList.remove("section-glow");
+      void sec.offsetWidth; // forces reflow so the animation can restart
+      sec.classList.add("section-glow");
+    }, idx * 700);
+  });
+}
+
+// Run immediately once
+runGlowSequence();
+
+// Then repeat forever every X ms
+const totalDuration = sections.length * 700 + 1000; 
+setInterval(runGlowSequence, totalDuration);
 
 /* Skill bar animation */
 document.querySelectorAll(".skill-bar").forEach((bar, idx) => {
