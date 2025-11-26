@@ -182,6 +182,34 @@
     color: #4ecbff; /* same color as other headings */
     font-weight: 800; /* same as h2/h3 headings */
     font-size: inherit; /* keeps it the same size as your <p> text */
+    text-align: center;
+  }
+
+  .job-description {
+    text-align: left;
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.2rem; /* optional, adds indent to bullets */
+    list-style-type: disc;
+    line-height: 1.6;
+  }
+
+  .job-divider {
+    border: none;             /* remove default hr border */
+    height: 2px;              /* thickness of the line */
+    background-color: #29bfff; /* same as section headers */
+    margin: 1.5rem 0;         /* spacing above and below the line */
+    border-radius: 2px;       /* optional, rounded edges */
+  }
+
+  .job-description ul {
+    list-style-type: disc;  /* keeps bullet points for nested lists */
+    margin-left: 1.2rem;    /* adjust indent */
+    line-height: 1.5;       /* spacing between lines */
+  }
+
+  .job-description ul ul {
+    list-style-type: circle; /* different bullet style for nested list */
+    margin-left: 1rem;       /* extra indent */
   }
 
   /* SKILLS */
@@ -291,11 +319,29 @@
   <section id="experience"><h2>Experience</h2>
     <span class="job-title">Security Operations Analyst — GRC Team</span><br/>
     <span class="job-title"><em>2018–Present</em></span>
-    <ul><li>Maintained compliance baselines using Tripwire Enterprise.</li></ul>
-    <ul><li>Maintained compliance baselines using Tripwire Enterprise.</li></ul>
+    <ul class="job-description">
+      <li>Security Compliance subject matter expert for multiple platforms (Windows Servers, Virtual Machines, Workstations).</li>
+      <li>Primary Tasks: Security compliance and monitoring, secure baseline design and implementation, compliance reporting.</li>
+      <li>Secondary Tasks: Standards drafting and review, security consultancy, reporting script creation.</li>
+      <li>Tools used: Tripwire Enterprise (config monitoring), Tableau (data presentation), Python/Powershell (scripting and automation), ISO270001/CIS/NIST/APRA/PCI-DSS(Compliance Frameworks).</li>
+      <li>Compliance Environments: Microsoft Windows, VMware, Citrix, AWS</li>
+      <li>Accomplishments:
+        <ul>
+          <li>Designed, developed and delivered NZ-specific security baselines for Windows Servers comprising company and industry-recommended standards.</li>
+          <li>Automated reporting scripts reduced weekly manual work by 10 hours.</li>
+          <li>Presented security dashboards to senior management, increasing visibility.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+    <hr class="job-divider">
     <span class="job-title">Security Operations Analyst — GRC Team</span><br/>
     <span class="job-title"><em>2018–Present</em></span>
-    <ul><li>Maintained compliance baselines using Tripwire Enterprise.</li></ul>
+    <ul class="job-description">
+      <li>Security Compliance subject matter expert for multiple platforms (Windows Servers, Virtual Machines, Workstations)</li>
+      <li>Primary Tasks: Security compliance and monitoring, secure baseline design and implementation, compliance reporting.</li>
+      <li>Secondary Tasks: Standards drafting and review, security consultancy, reporting script creation</li>
+    </ul>
   </section>
 
   <section id="certifications"><h2>Certifications</h2><ul><li>CompTIA CySA+</li></ul></section>
@@ -303,7 +349,7 @@
   <section id="education"><h2>Education</h2><p>Bachelor of IT or similar</p></section>
 
   <section id="projects"><h2>Projects</h2>
-    <div class="project-card"><h3>Home Lab Setup Guide</h3><p>Building enterprise-grade home labs.</p></div>
+    <div class="project-card"><h3>Home Lab Setup Guide</h3><p>A guide to my current home-lab environment using Windows Server, ParrotOS, and pfSense.</p></div>
     <div class="project-card"><h3>AI-Assisted Threat Detection</h3><p>Using ML models for anomaly detection.</p></div>
     <div class="project-card">
       <h3>OWASP Top 10</h3>
