@@ -114,6 +114,8 @@
     box-shadow: 0 0 8px #007accaa;
     font-family: "Orbitron", sans-serif;
     transition: all 0.25s ease;
+    min-width: 150px;
+    line-height: 1.4rem
   }
 
   .resume-button:hover {
@@ -224,10 +226,13 @@
 
   .skill-label {
     font-weight: 700;
+    font-size: 0.85rem;
+    width: 150px;
+    white-space: nowrap;
     color: #37a1ff;
     text-shadow: 0 0 2px #29bfff;
     margin-bottom: 4px;
-    display: block;
+    display: inline-block;
     font-family: "Orbitron", sans-serif;
   }
 
@@ -288,6 +293,7 @@
   </p>
 
   <a class="resume-button" href="Mark-Haakma-Resume.pdf" download>Download Resume</a>
+  <a class="resume-button" href="about-me.html">About Me</a>
 </header>
 
 <nav class="jump-nav">
@@ -305,19 +311,23 @@
     <p>A cybersecurity compliance analyst with 7+ years industry experience, and decades of the hobby version. There's always more to learn, so don't stop learning it.</p>
     <p>If you're a recruiter, a colleague, or an interested learner - welcome! Grab my CV, review my fit for your role, or learn a little something in the Projects section.</p>
     <p>If you want to know more about the man behind the page, check out my About Me page.</p>
-    
-    <a class="resume-button" href="about-me.html">About Me</a>
   </section>
 
 
   <section id="skills"><h2>Skills & Tools</h2>
     <div class="skills-grid">
-      <div class="skill-item"><span class="skill-label">Python</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="85"></div></div></div>
-      <div class="skill-item"><span class="skill-label">Tripwire Enterprise</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="90"></div></div></div>
-      <div class="skill-item"><span class="skill-label">Imperva</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="70"></div></div></div>
-      <div class="skill-item"><span class="skill-label">Linux</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="80"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Data Analytics</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="90"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Data Presentation</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="75"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Stakeholder Communication</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="90"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Security Baselining</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="75"></div></div></div>      
+      <div class="skill-item"><span class="skill-label">Python/Powershell Scripts</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="70"></div></div></div>
+      <div class="skill-item"><span class="skill-label">C# Programming</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="65"></div></div></div>
       <div class="skill-item"><span class="skill-label">Windows Server</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="75"></div></div></div>
-      <div class="skill-item"><span class="skill-label">AI Security</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="65"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Security Automation</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="65"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Ethical Hacking</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="75"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Wireshark</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="50"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Azure AI Engineering</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="55"></div></div></div>
+      <div class="skill-item"><span class="skill-label">Linux</span><div class="skill-bar-wrapper"><div class="skill-bar" data-skill="65"></div></div></div>
     </div>
   </section>
 
@@ -469,10 +479,10 @@ setInterval(draw, 45);
 <script>
 const subtitles = [
   "Cybersecurity Analyst",
-  "Security Engineer in Progress",
-  "AI-Assisted Defense Enthusiast",
+  "Security Scripting Engineer",
+  "Certified Azure AI Engineer",
   "Home Lab Builder",
-  "Threat Detection & Automation"
+  "Full-Time Learner"
 ];
 
 let idx = 0;
