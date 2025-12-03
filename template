@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mark J. Haakma - About Me</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ================= GLOBAL STYLES ================= */
+  body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a0f1f;
+    color: #f0f8ff;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* ---------------- HEADER ---------------- */
+  .cyber-header {
+    background: linear-gradient(135deg, #0a0f1f 0%, #00152d 40%, #002b55 100%);
+    padding: 2.5rem 1rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid #29bfff50;
+    box-shadow: 0 0 25px #009dff40;
+  }
+
+  .header-rain {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+
+  .cyber-title {
+    position: relative;
+    z-index: 2;
+    font-family: "Orbitron", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #4ecbff;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 0 4px #29bfff, 0 0 8px #009dff, 0 0 15px #007acc;
+    animation: titleGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 4px #29bfff, 0 0 8px #009dff, 0 0 15px #007acc; }
+    50% { text-shadow: 0 0 8px #4ecbff, 0 0 16px #00b7ff, 0 0 25px #00c8ff; }
+  }
+
+  /* Contact / Header Link Glow */
+  .cyber-header .contact a,
+  .resume-button {
+    color: #4ecbff;
+    text-decoration: none;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .cyber-header .contact a:hover,
+  .resume-button:hover {
+    color: #ffffff;
+    text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff;
+    animation: linkGlow 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes linkGlow {
+    0%,100% { text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff; }
+    50% { text-shadow: 0 0 6px #4ecbff, 0 0 14px #29bfff, 0 0 22px #00c8ff; }
+  }
+
+  .resume-button {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    text-align: center;
+    background: #007acc;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #007accaa;
+    font-family: "Orbitron", sans-serif;
+    transition: all 0.25s ease;
+  }
+  .resume-button:hover {
+    background: #00aaff;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 12px #39c2ff, 0 0 28px #00aaff, 0 0 45px #0099ff, inset 0 0 6px #007acc;
+    color: white;
+  }
+
+  /* ---------------- NAVIGATION ---------------- */
+  nav.jump-nav {
+    background: #0f1424;
+    border-bottom: 2px solid #007acc22;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* Nav link glow */
+  nav.jump-nav a {
+    color: #4ecbff;
+    text-decoration: none;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  nav.jump-nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff;
+    animation: linkGlow 1.5s ease-in-out infinite alternate;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  section {
+    background-color: #111827;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    text-align: center;
+    opacity: 0.97;
+    border: 2px solid #29bfff50;
+    box-shadow: 0 0 12px #29bfff33;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  @keyframes sectionPulse {
+    0%   { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+    50%  { box-shadow: 0 0 18px #4ecbffcc; transform: scale(1.015); }
+    100% { box-shadow: 0 0 6px #29bfff55; transform: scale(1); }
+  }
+
+  .section-glow { animation: sectionPulse 2.2s ease-in-out forwards; }
+
+  section h2 {
+    border-bottom: 2px solid #29bfff;
+    padding-bottom: 0.3rem;
+    color: #4ecbff;
+    font-family: "Orbitron", sans-serif;
+    text-shadow: 0 0 3px #29bfff;
+  }
+</style>
+</head>
+
+<body>
+<header class="cyber-header">
+  <canvas class="header-rain"></canvas>
+  <h1 class="cyber-title">About Me</h1>
+  <a class="resume-button" href="index.html">Return Home</a>
+</header>
+
+<nav class="jump-nav">
+  <a href="#about">About Me</a>
+</nav>
+
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Write your “About Me” content here. Include career summary, philosophy, or highlights. This section will automatically inherit your header animation, colors, and glow effects.</p>
+  </section>
+</main>
+
+<script>
+/* ========== DIGITAL RAIN ========== */
+const canvas = document.querySelector('.header-rain');
+const ctx = canvas.getContext('2d');
+function sizeCanvas() { const header = document.querySelector('.cyber-header'); canvas.width = header.clientWidth; canvas.height = header.clientHeight; }
+sizeCanvas();
+window.addEventListener('resize', sizeCanvas);
+const chars = "アカサタナハマヤラワ0123456789".split("");
+const fontSize = 14; let columns, drops;
+function setup() { columns = Math.floor(canvas.width / fontSize); drops = new Array(columns).fill(1); }
+setup();
+function draw() {
+  ctx.fillStyle = "rgba(2, 15, 30, 0.08)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#29bfff"; ctx.font=fontSize+"px monospace";
+  for(let i=0;i<drops.length;i++){
+    const text = chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+    if(drops[i]*fontSize>canvas.height && Math.random()>0.975){drops[i]=0;}
+    drops[i]++;
+  }
+}
+setInterval(draw,45);
+
+/* ========== SECTION GLOW CASCADE ========== */
+const sections=document.querySelectorAll("main section");
+function runGlowSequence(){sections.forEach((sec,idx)=>{setTimeout(()=>{sec.classList.remove("section-glow");void sec.offsetWidth;sec.classList.add("section-glow");},idx*700);});}
+runGlowSequence();
+setInterval(runGlowSequence,sections.length*700+1000);
+</script>
+
+</body>
+</html>

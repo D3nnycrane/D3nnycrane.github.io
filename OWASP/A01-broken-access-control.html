@@ -111,6 +111,19 @@
     text-shadow: 0 0 4px #4ecbff, 0 0 8px #29bfff, 0 0 12px #00c8ff;
   }
 
+  .themed-link {
+    color: #37a1ff;
+    text-shadow: 0 0 4px #29bfff, 0 0 6px #29bfff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .themed-link:hover {
+    color: #00d0ff;
+    text-shadow: 0 0 8px #00d0ff, 0 0 12px #00d0ff;
+  }
+
   main {
     display: flex;
     flex-direction: column;
@@ -140,6 +153,12 @@
     font-size: 1.5rem;
     font-weight: 800;
     text-shadow: 0 0 3px #29bfff;
+  }
+
+  #overview, 
+  #example, 
+  #fix {
+    text-align: center;
   }
 
   /* section glow animation */
@@ -181,7 +200,17 @@
 <main>
   <section id="overview">
     <h2>Overview</h2>
-    <p>Broken Access Control occurs when users can act outside of their intended permissions. Attackers can gain unauthorized access to sensitive data, functions, or administrative actions.</p>
+    <p>Broken Access Control moved from 5th in 2024 to 1st in the 2025 OWASP Top 10 list. Primarily a failure of the principle of Least Privilege, it opens entities up to unauthorised data access, functions, or administrative actions.</p>
+    <p>
+        From the 
+        <a href="https://owasp.org/Top10/A01_2021-Broken_Access_Control/" 
+          target="_blank" 
+          class="themed-link">
+          OWASP description
+        </a>
+        : "Access control enforces policy such that users cannot act outside of their intended permissions. Failures typically lead to unauthorized information disclosure, modification, or destruction of all data or performing a business function outside the user's limits."
+      </p>
+      <p>These failures usually arise from inconsistent permission checks, insecure default configurations, or developers relying on client-side enforcement rather than validating permissions on the server. Below is an example of what this vulnerability looks like in practice.</p>
   </section>
 
   <section id="example">
