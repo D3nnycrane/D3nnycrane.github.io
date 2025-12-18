@@ -216,23 +216,70 @@
 
   <section id="example">
     <h2>Example Exploit</h2>
-    <p>As you might expect from the most common control failure, Broken Access Control can be incredibly simple while causing massive issues. Consider the case of an organisation using Role Based Access:</p>
-    <pre>
-// Example: URL manipulation allows unauthorized access
-GET /admin/delete-user?id=123 HTTP/1.1
-Host: vulnerable-app.local
-Cookie: session=attacker-session
-    </pre>
+    <p>As you might expect from the most common control failure, Broken Access Control can be incredibly simple while causing massive issues. For our case study, let's consider the case of an organisation using Role Based Access.</p>
+    <p>Suppose we have an organisation using Role Based access control mechanisms to ensure least Privilege is being adhered to. In this organisation, we have Alice, a senior financial analyst, and Bob, an auditing consultant.</p>
+      <figure style="text-align: center;">
+        <img src="./figure-1.png" alt="User Profiles and Memberships">
+        <figcaption style="font-size: 0.9em;">
+          <em>
+            Figure 1: Bob and Alice's respective membership profiles.
+          </em>
+        </figcaption>
+      </figure>
+      <p>In keeping with good Role-Based Access practices, access to the Finance Team network share is correctly limited to members of the Finance Team.</p>
+      <figure style="text-align: center;">
+        <img src="./figure-2.png" alt="Role-Based access working as intended." style="width: 825px; margin-bottom: 15px;">
+        <img src="./figure-3.png" alt="Role-Based access working as intended." style="width: 825px; height: 250px;">
+        <figcaption style="font-size: 0.9em;">
+          <em>
+            Figure 2 & 3: Role based access working correctly in action. Access is limited based on user's group assignments.
+          </em>
+        </figcaption>
+      </figure>
+      <p>So far, so great! Role-Based access controls are in place, and the folder's access is restricted only to those groups that require access as part of their job function. But here's where our scenario's problem arises. As an auditor, one of Bob's issues is artefact gathering; it relies on asking someone to ask someone to get data to pass to Bob. Ever the efficient type, Bob approaches the system administrator and outlines his problems. The administrator thinks of a solution - it can't hurt to grant Bob parent folder access, right? It's just one user, who technically has a work-based need to access this information to perform their roles and responsibilities.</p>
+      <p>Our helpful administrator comes up with a great solution: since Bob needs access to team folders to complete his audit, how about granting access at the parent folder level? By granting Read access (or even worse, Modify/Full control", Bob should be able to grab what he needs, just so long as he lets the admin knows when he's done! What's the worst that could happen, right?</p>
+      <figure style="text-align: center;">
+        <img src="./figure-4.png" alt="Bob being given universal access.">
+        <figcaption style="font-size: 0.9em;">
+          <em>
+            Figure 4: Role based access working correctly in action. Access is limited based on user's group assignments.
+          </em>
+        </figcaption>
+      </figure>
+      <p>By granting Bob Read & Execute rights at the parent folder level, there shouldn't be anything in Bob's way to get what he needs to complete his audit. But there's a slight problem - this has granted Bob not only unauthorised access to the Finance folder, but to <em>every single share within the parent folder</em>.</p>
+      <figure style="text-align: center;">
+        <img src="./figure-5.png" alt="Role Based Access being overruled by parent folder inheritance." style="width: 825px;">
+        <figcaption style="font-size: 0.9em;">
+          <em>
+            Figure 5: With parent folder access and permission inheritance, there is now nothing stopping Bob from overriding Role-Based Access.
+          </em>
+        </figcaption>
   </section>
 
   <section id="fix">
     <h2>Proper Fix</h2>
+    <p>So it seems unlikely, right? You really think this day in age that system administrators, access management personnel, or others are just going to let you have the access you want instead of the access you need? Unfortunately, not only is it very common, it's <strong>the number one factor in some of the world's biggest breaches.</strong></p>
     <ul>
-      <li>Enforce server-side authorization checks for every action.</li>
-      <li>Implement a deny-by-default access policy.</li>
-      <li>Audit and log access control failures.</li>
-      <li>Use frameworks with built-in access control wherever possible.</li>
+      <li>
+        <a href="https://www.bbc.com/news/technology-47812470" class="themed-link" target="_blank"><strong>Facebook (2019)</strong></a>: Exposed personal data of over 540 million users due to overly permissive API endpoints, allowing third-party apps to access information without proper access controls.
+      </li>
+      <li>
+        <a href="https://edition.cnn.com/2019/07/29/business/capital-one-data-breach" class="themed-link" target="_blank"><strong>Capital One (2019)</strong></a>: A breach affecting ~100 million customers occurred when a misconfigured firewall and overly broad IAM permissions allowed an attacker to retrieve sensitive cloud-hosted data.
+      </li>
+      <li>
+        <a href="https://www.bbc.com/news/technology-42075306" class="themed-link" target="_blank"><strong>Uber (2016)</strong></a>: Data of 57 million users was compromised because private S3 buckets and internal systems lacked proper access restrictions, exposing the data to anyone with the links.
+      </li>
     </ul>
+    <p>So what can organisations do to protect themselves against the issue of broken access control mechanisms? The good news is there is a deep and wide range of practices that organisations of any size, scale and security posture can implement to blunt the odds of being breached in this way: </p>
+    <ul>
+      <li><strong>Principle of Least Privilege:</strong> Grant users only the permissions they need, regularly review access rights, and remove temporary access when no longer required.</li>
+      <li><strong>Use Groups, Not Individual Users:</strong> Assign rights to groups (e.g., Finance, Security, Audit) instead of adding individual users. Avoid “Everyone” or “Authenticated Users” unless absolutely necessary.</li>
+      <li><strong>Manage Inheritance Carefully:</strong> Break inheritance on sensitive folders if needed, monitor parent-level changes that could cascade, and use explicit permissions for critical data.</li>
+      <li><strong>Audit and Monitoring:</strong> Enable NTFS auditing, log who accesses what and when, and regularly review logs for unusual patterns.</li>
+      <li><strong>Temporary Access Controls:</strong> Provide time-limited access for external consultants or temporary staff and automate removal after the project ends.</li>
+      <li><strong>Educate Administrators:</strong> Ensure IT staff understand group scope, inheritance, and default permissions to avoid convenience-based misconfigurations.</li>
+    </ul>
+    <p>Broken Access Control is not an obscure vulnerability; it’s one of the most common sources of major data breaches. As we’ve demonstrated, a simple misconfiguration, even something as innocuous as granting an auditing consultant access at a parent folder, can cascade into exposure of sensitive data. Following best practices like least privilege, proper group management, controlled inheritance, and audit logging can prevent these real-world failures.</p>
   </section>
 </main>
 
